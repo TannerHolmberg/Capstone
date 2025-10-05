@@ -1,0 +1,88 @@
+.landing-first-container{
+    width: 100%;
+    height: calc(80vh - 80px);
+    background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.Landing-Logo{
+    display: block;
+    width: 600px;
+    padding-top: 50px;
+}
+
+.curve-line{
+  height: calc(80vh - 200px);
+  width: auto;
+  display: block;
+  margin: 0 40px;
+}
+
+h1 {
+  font-family: "Permanent Marker", cursive;
+  color: white;
+  font-size: 48px;
+}
+
+.landing-quote{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.landing-quote-subtext{
+    width: 450px;
+    height: 200px;
+    background-color: #0D4629;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    border: solid white 5px;
+    border-radius: 15px;
+    transform: rotate(-5deg);
+    color: white;
+    padding: 0 20px 0 20px;
+    font-family: 'Handlee', cursive;
+}
+
+.BrowseListingsButton{
+    width: 200px;
+    margin-top: 40px;
+    font-family: 'Handlee', cursive;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: 5px solid #F8ca30;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #0D4629;
+    color: white;
+    margin-right: 60px;
+}
+
+.PostListingsButton{
+    width: 200px;
+    margin-top: 40px;
+    font-family: 'Handlee', cursive;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: solid 5px #f27984;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #0D4629;
+    color: white;
+}
+
+.Landing-Goal{
+    margin-left: 300px;
+    width: 80px;
+    padding-top: 50px;
+}
+
+.Landing-Books{
+    margin-bottom: 100px;
+}
+
+

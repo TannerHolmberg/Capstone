@@ -1,0 +1,46 @@
+.chalk-tray{
+    width: 100%;
+    height: 40px;
+    background-color: #b3b3b3;
+    position: relative;
+    box-shadow: 0px 20px 6px rgba(0, 0, 0, 0.2);
+}
+
+.Eraser{
+    position: absolute;
+    bottom: 100%;  /* aligns bottom of eraser to top of tray */
+    left: 5%;
+    width: 150px;
+    height: 50px;
+    background-color: black;
+}
+
+.chalk-piece-white{
+    position: absolute;
+    bottom: 100%;  /* aligns bottom of chalk to top of tray */
+    left: 40%;
+    width: 80px;
+    height: 20px;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.chalk-piece-yellow{
+    position: absolute;
+    bottom: 100%;  /* aligns bottom of chalk to top of tray */
+    left: 60%;
+    width: 80px;
+    height: 20px;
+    background-color: #F8ca30;
+    border-radius: 5px;
+}
+
+.chalk-piece-pink{
+    position: absolute;
+    bottom: 100%;  /* aligns bottom of chalk to top of tray */
+    left: 80%;
+    width: 80px;
+    height: 20px;
+    background-color: #f27984;
+    border-radius: 5px;
+}
