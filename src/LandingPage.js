@@ -46,8 +46,14 @@ function LandingPage() {
         <ChalkTray />
         <div className="bullitenDivider"></div>
         <section className="bullitenBoard">
-          <div className="bullitenBorderLR"></div>
-          <div className="bullitenBorderLR"></div>
+          <div className="bullitenBorderL"></div>
+          <div className="bullitenBorderR"></div>
+          <div className="postIt1"></div>
+          <div className="postItContainer">
+            <div className="postIt2" id="postItGreen"></div>
+            <div className="postIt2" id="postItBlue"></div>
+            <div className="postIt2" id="postItPink"></div>
+          </div>
         </section>
         <div className="bullitenDivider"></div>
 
@@ -71,7 +77,33 @@ function LandingPage() {
               <p><span style={{ color: 'rgb(255, 0, 255)' }}>Many</span> Parents want to help but don’t always know how.</p>
             </div>
           </div>
-          
+        </section>
+        <section className="ReportCard">
+          <img className="rcLogo" src={logo} alt="Classroom Connect Logo" />
+          <h2 className="ReportCardHeader">Report Card</h2>
+          <table>
+            <tr>
+              <th>Subject</th>
+              <th>Grade</th>
+            </tr>
+            <tr>
+              <td className="subjectData">Teachers save money</td>
+              <td><span style={{ color: 'red', fontFamily: 'Handlee, cursive' }}>A+</span></td>
+            </tr>
+            <tr>
+              <td>Parents give directly</td>
+              <td><span style={{ color: 'red', fontFamily: 'Handlee, cursive' }}>A+</span></td>
+            </tr>
+            <tr>
+              <td>Students succeed</td>
+              <td><span style={{ color: 'red', fontFamily: 'Handlee, cursive' }}>A+</span></td>
+            </tr>
+          </table>
+          <p className="reportCardText">Join today!</p>
+          <div>
+                    <button className="BrowseListingsButton">Browse<br />Wishlists</button>
+                    <button className="PostListingsButton">Post<br />Listings</button>
+                </div>
         </section>
     </div>
   );
