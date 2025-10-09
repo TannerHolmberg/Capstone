@@ -16,7 +16,6 @@ body {
     display: block;
     width: 500px;
     padding-top: 50px;
-    border: solid 1px red;
 }
 
 .curve-line{
@@ -84,13 +83,11 @@ body {
 }
 
 .Landing-Goal{
-    border: solid 1px red;
     margin-left: 300px;
     width: 80px;
 }
 
 .Landing-Books{
-    border: solid 1px red;
     margin-bottom: 100px;
 }
 
@@ -413,6 +410,8 @@ table{
 
     .landing-quote h1{
         font-size: 30px;
+        width: calc(100vw - 10px);
+        text-align: center;
     }
     .Landing-Goal-mobile{
         display: block;
@@ -434,6 +433,10 @@ table{
         align-items: center;
         padding: 0;
         margin: 0;
+    }
+
+    .landing-quote-subtext{
+        font-size: 20px;
     }
 
     svg{
