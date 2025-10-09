@@ -35,6 +35,7 @@ h1 {
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-right: 75px;
 }
 
 .landing-quote-subtext{
@@ -264,7 +265,6 @@ h1 {
     gap: 0;
 }
 
-
 .rcLogo{
     padding: 0;
     margin: 0;
@@ -303,3 +303,83 @@ th {
     font-family: 'Caveat', cursive;
     font-size: 70px;
 }
+
+.Landing-Goal-mobile{
+    display: none;
+}
+
+@media screen and (max-width: 480px) {
+    .Landing-Goal-mobile{
+        display: block;
+    }
+
+.curve-line{
+  display: none;
+}
+.Landing-Goal{
+    display: none;
+}
+
+.Landing-Books{
+    display: none;
+}
+  .landing-first-container {
+    background-color: red;
+    flex-direction: column;
+  }
+
+  .BrowseListingsButton{
+    width: 200px;
+    margin-top: 40px;
+    font-family: 'Handlee', cursive;
+    font-size: 24px;
+    padding: 10px 20px;
+    border: 5px solid red;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #0D4629;
+    color: white;
+    margin-right: 60px;
+}
+
+.Landing-Logo{
+    display: none;
+}
+
+.bullitenBoard{
+    flex-direction: column;
+}
+
+.postIt1{
+    width: 400px;
+    height: 200px;
+    background-color: #F8ca30;
+    transform: rotate(-5deg);
+    margin-top: 50px;
+    margin-left: 0;
+}
+
+.postIt2{
+    width: 300px;
+    height: 300px;
+    background-color: #F8ca30;
+    transform: rotate(-5deg);
+}
+
+.postItContainer{
+    flex-direction: column;;
+}
+
+.stepsIconsContainer{
+    flex-direction: column;
+}
+
+.StepsContainer{
+    flex-direction: column;
+}
+
+table{
+    width: 90%;
+}
+}
+

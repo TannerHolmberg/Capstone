@@ -37,6 +37,7 @@ function LandingPage() {
                 <div className="landing-quote-subtext">
                     <p>A central place for teachers to share classroom needs and parents to help directly</p>
                 </div>
+                <img className="Landing-Goal-mobile" src={goal} alt="Goal" />
                 <div>
                     <button className="BrowseListingsButton">Browse<br />Wishlists</button>
                     <button className="PostListingsButton">Post<br />Listings</button>
