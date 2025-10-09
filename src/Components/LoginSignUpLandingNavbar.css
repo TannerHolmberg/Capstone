@@ -45,3 +45,15 @@
     background-color: #0D4629;
     color: white;
 }
+
+@media (max-width: 768px){
+    .navbar h1{
+        font-size: 16px;
+    }
+
+    .login-button,
+    .signup-button {
+        font-size: 16px;
+        padding: 8px 16px;
+    }
+}
