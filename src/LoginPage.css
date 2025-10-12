@@ -1,0 +1,91 @@
+body {
+  padding-top: 60px; /* adjust to your navbar height */
+}
+
+.login-container{
+    width: 100%;
+    height: auto;
+    padding: 0 0 100px 0;
+    background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: left;
+}
+
+.login-logo-quote-container{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.login-quote h1 {
+  font-family: "Permanent Marker", cursive;
+  color: white;
+  font-size: 45px;
+}
+
+.login-quote{
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    align-items: center;
+    margin-right: 75px;
+}
+
+
+.login-form{
+    width: 300px;
+    margin-top: 40px;
+    font-family: 'Handlee', cursive;
+    font-size: 24px;
+    padding: 10px 15px;
+    border: 5px solid  whitesmoke;
+    border-radius: 15px;
+    cursor: pointer;
+    background-color: #0D4629;
+    color: white;
+    margin-right: 60px;
+    margin-left: 30px;
+}
+
+/*
+.login-form {
+  background-color: #0D4629;
+  padding: 10px 20px;
+  border-radius: 15px;
+  max-width: 350px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+*/
+
+.login-form input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+  padding: 10px 0;
+  margin-bottom: 16px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+}
+
+.login-form input::placeholder {
+  color: #fff;
+  opacity: 0.7;
+}
+
+.login-form button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  background: #1976d2;
+  color: #fff;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
