@@ -1,28 +1,38 @@
+
 body {
-  padding-top: 60px; /* adjust to your navbar height */
+  padding-top: 60px;  
 }
 
-.login-container{
-    width: 100%;
-    height: auto;
-    padding: 0 0 100px 0;
-    background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    justify-content: left;
+.login-container {
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+  gap: 48px;
 }
 
 .login-logo-quote-container{
+    margin-top: 30px;
     display: flex;
+    width: 500px;
     flex-direction: column;
     align-items: center;
+    padding-right: 100px;
+}
+
+.login-logo {
+  display: block;
+  width: 500px;
+  height: auto;
 }
 
 .login-quote h1 {
   font-family: "Permanent Marker", cursive;
   color: white;
-  font-size: 45px;
+  font-size: 41px;
+  margin-bottom: 100px;
 }
 
 .login-quote{
@@ -39,7 +49,7 @@ body {
     margin-top: 40px;
     font-family: 'Handlee', cursive;
     font-size: 24px;
-    padding: 10px 15px;
+    padding: 10px 40px;
     border: 5px solid  whitesmoke;
     border-radius: 15px;
     cursor: pointer;
@@ -49,26 +59,13 @@ body {
     margin-left: 30px;
 }
 
-/*
-.login-form {
-  background-color: #0D4629;
-  padding: 10px 20px;
-  border-radius: 15px;
-  max-width: 350px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-*/
-
 .login-form input {
   background: transparent;
   border: none;
   border-bottom: 2px solid #fff;
   color: #fff;
   padding: 10px 0;
-  margin-bottom: 16px;
+  margin-bottom: 50px;
   width: 100%;
   outline: none;
   font-size: 1rem;
@@ -83,9 +80,10 @@ body {
   width: 100%;
   padding: 10px;
   border-radius: 6px;
-  background: #1976d2;
-  color: #fff;
-  border: none;
+  background: #1FC874;
+  color: black;
+  border: 5px solid rgb(212, 67, 67);
   font-weight: bold;
   cursor: pointer;
+  margin-bottom: 30px;
 }
