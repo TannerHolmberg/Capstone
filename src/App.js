@@ -5,15 +5,17 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } f
 import LandingPage from "./LandingPage";
 import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
+import MapPage from './MapPage';
 
 function App() {
   return (
     <Router>
       <Routes>
-        {/* Landing Page */}
+        {/* Pages */}
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/map" element={<MapPage />} />
       </Routes>
     </Router>
   );
