@@ -1,0 +1,79 @@
+.signup-container {
+  display: flex;
+  height: auto;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: center;
+  background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+  padding: 60px 80px;
+  gap: 48;
+}
+
+.signup-logo-quote-container {
+    margin-top: 30px;
+    display: flex;
+    width: 500px;
+    flex-direction: column;
+    align-items: center;
+    padding-right: 100px;
+}
+
+.signup-logo {
+  width: 500px;
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.signup-quote h1 {
+  font-family: "Permanent Marker", cursive;
+  color: white;
+  font-size: 38px;
+  text-align: left;
+  margin: 0;
+}
+
+.signup-form {
+  flex: 1;
+  max-width: 400px;
+  font-family: 'Handlee', cursive;
+  font-size: 24px;
+  padding: 20px 40px;
+  border: 5px solid whitesmoke;
+  border-radius: 15px;
+  background-color: #0D4629;
+  color: white;
+  align-self: flex-start;
+}
+
+.signup-form form {
+  display: flex;
+  flex-direction: column;
+}
+
+.signup-form input {
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  color: #fff;
+  padding: 10px 0;
+  margin-bottom: 50px;
+  width: 100%;
+  outline: none;
+  font-size: 1rem;
+}
+
+.signup-form button {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  background: #1FC874;
+  color: white;
+  border: 5px solid rgb(212, 67, 67);
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 30px;
+}
+
+.signup-form button:hover {
+  background-color: #005fa3;
+}
