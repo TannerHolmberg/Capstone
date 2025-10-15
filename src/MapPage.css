@@ -1,0 +1,43 @@
+.map-page-container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    background-color: red;
+}
+
+.map-wrapper{
+    flex: 1;                         /* ✅ ensures it expands to fill the space */
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+
+.mainContent{
+    position: absolute;              /* ✅ Use absolute instead of fixed */
+        top: 100px;                      /* below TopBar */
+        left: 200px;                     /* beside NavLeft */
+        width: calc(100% - 200px);
+        height: calc(100vh - 100px);
+        display: flex;
+        flex-direction: column;
+        background-color: #e3e3e3;       /* optional for layout visibility */
+        overflow: hidden;
+        z-index: 0;
+}
+
+.map-filter-bar{
+    color: white;
+    position: absolute;
+    top: 100px;
+    left: 150px;
+    height: 60%;
+    width: 200px;
+    transform: translateX(-50%);
+    background-color: #137E49;
+    padding: 10px 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 1000; /* Ensure it appears above the map */
+}

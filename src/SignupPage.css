@@ -1,6 +1,6 @@
 .signup-container {
   display: flex;
-  height: auto;
+  height: calc(100vh - 220px);
   flex-direction: row;
   align-items: flex-start;
   justify-content: center;

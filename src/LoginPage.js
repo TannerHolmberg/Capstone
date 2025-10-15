@@ -1,11 +1,28 @@
 import React from "react";
+import { useState } from "react";
 import logo from "./images/ClassroomConnect.png";
 import ChalkTray from "./Components/ChalkTray";
 import Navbar from "./Components/LoginSignUpLandingNavbar";
+import { signInWithEmailAndPassword } from "firebase/auth";
+import { auth } from "./firebase";
 import "./LoginPage.css";
 import { NavLink } from "react-router-dom";
 
 function LoginPage() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      console.log(email, password);
+      await signInWithEmailAndPassword(auth, email, password);
+      alert("Login successful!");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
+
   return (
     <div>
       <Navbar />
@@ -17,10 +34,10 @@ function LoginPage() {
           </div>
         </div>
         <div className="login-form">
-          <form>
+          <form onSubmit={handleLogin}>
             <h2>Login</h2>
-              <input type="email" placeholder="Email" required />
-              <input type="password" placeholder="Password" required />
+              <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required />
+              <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
               <button type="submit">Sign In</button>
           </form>
         </div>

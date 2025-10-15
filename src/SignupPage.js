@@ -1,12 +1,35 @@
-import React from "react";
+import React, { useState } from "react";
+import { createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "./firebase";
 import Navbar from "./Components/LoginSignUpLandingNavbar";
+import ChalkTray from "./Components/ChalkTray";
 import "./SignupPage.css";
 import logo from "./images/ClassroomConnect.png";
-import ChalkTray from "./Components/ChalkTray";
-
-
 
 function SignupPage() {
+    const [firstName, setFirstName] = useState("");
+    const [lastName, setLastName] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const navigate = useNavigate();
+
+    const handleSignup = async (e) => {
+        e.preventDefault();
+
+        try {
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        await updateProfile(userCredential.user, {
+            displayName: `${firstName} ${lastName}`,
+        });
+        alert("Account created successfully!");
+        console.log("User created:", userCredential.user);
+        navigate("/login");
+        } catch (err) {
+            alert(err.message);
+        }
+    };
+
     return ( 
         <div>
             <Navbar />
@@ -18,12 +41,12 @@ function SignupPage() {
                     </div>
                 </div>
                 <div className="signup-form">      
-                    <form>
+                    <form onSubmit={handleSignup}>
                         <h2>Signup Page</h2>
-                        <input type="First" placeholder="First Name" required />
-                        <input type="Last" placeholder="Last Name" required />
-                        <input type="email" placeholder="Email" required />
-                        <input type="password" placeholder="Password" required />    
+                        <input type="First" placeholder="First Name" onChange={(e) => setFirstName(e.target.value)} required />
+                        <input type="Last" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} required />
+                        <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
+                        <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />    
                         <button type="submit">Create Account</button>
                     </form>
                 </div>    
