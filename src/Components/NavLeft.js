@@ -6,12 +6,12 @@ const NavLeft = () => {
     return ( 
         <div className="nav-left">
             <h1>Classroom<br></br>Connect</h1>
-            <NavLink to='/Dashboard' className="nav-link">Dashboard</NavLink>
-            <NavLink to='/MapPage' className="nav-link">Map</NavLink>
-            <NavLink to='/ManageListings' className="nav-link">Manage Listings</NavLink>
-            <NavLink to='/ManageWishlists' className="nav-link">Manage WishLists</NavLink>
-            <NavLink to='/ManageWishlists' className="nav-link">Messages</NavLink>
-            <NavLink to='/ManageWishlists' className="nav-link">Profile</NavLink>
+            <NavLink to='/dashboard' className="nav-link">Dashboard</NavLink>
+            <NavLink to='/map' className="nav-link">Map</NavLink>
+            <NavLink to='/' className="nav-link">Manage Listings</NavLink>
+            <NavLink to='/' className="nav-link">Manage WishLists</NavLink>
+            <NavLink to='/' className="nav-link">Messages</NavLink>
+            <NavLink to='/' className="nav-link">Profile</NavLink>
 
         </div>
      );

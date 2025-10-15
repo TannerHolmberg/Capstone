@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import logo from "./images/ClassroomConnect.png";
 import ChalkTray from "./Components/ChalkTray";
 import Navbar from "./Components/LoginSignUpLandingNavbar";
@@ -11,13 +12,14 @@ import { NavLink } from "react-router-dom";
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       console.log(email, password);
       await signInWithEmailAndPassword(auth, email, password);
-      alert("Login successful!");
+      navigate("/dashboard");
     } catch (err) {
       alert(err.message);
     }
