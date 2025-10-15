@@ -4,7 +4,6 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import ChalkTray from './Components/ChalkTray';
 import NavLeft from './Components/NavLeft.js';
 import TopBar from './Components/TopBar.js';
-import MainContent from './Components/MainContent.js';
 
 function MapPage() {
   return (
