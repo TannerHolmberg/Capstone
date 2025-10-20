@@ -7,6 +7,7 @@ import LoginPage from "./LoginPage";
 import SignupPage from "./SignupPage";
 import MapPage from './MapPage';
 import Dashboard from "./Dashboard";
+import ManageListingPage from "./ManageListingPage";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
         <Route path="/signup" element={<SignupPage />} />
         <Route path="/map" element={<MapPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
+        <Route path="/managelistings" element={<ManageListingPage />} />
       </Routes>
     </Router>
   );

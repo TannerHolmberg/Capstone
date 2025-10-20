@@ -1,0 +1,42 @@
+.Main-container {
+    padding-top: 50px;                      
+    padding-left: 210px;                     
+    width: calc(100% - 200px);
+    /*height: calc(100vh - 100px);*/
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+    overflow: hidden;
+    z-index: 0;
+}
+
+.Header-container h1 {
+    font-family: 'Handlee', cursive;
+    color: rgba(255, 255, 255, 0.858);
+    font-size: 30px;
+    margin-left: 50px;
+}
+
+.List-box{
+    width: 800px;
+    height: 150px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 20px;
+    gap: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.Listings-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
