@@ -47,6 +47,9 @@
 }
 
 @media (max-width: 768px){
+    .navbar{
+        width: 100vw;
+    }
     .navbar h1{
         font-size: 16px;
     }

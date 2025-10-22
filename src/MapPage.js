@@ -14,7 +14,7 @@ function MapPage() {
         <div className="map-wrapper">
             <MapContainer 
             key="unique-map" 
-            center={[51.505, -0.09]} 
+            center={[32.7767, -96.7970]} 
             zoom={13} 
             scrollWheelZoom={true}
             style={{ height: '100%', width: '100%' }}

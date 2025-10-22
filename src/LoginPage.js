@@ -42,6 +42,10 @@ function LoginPage() {
               <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required />
               <button type="submit">Sign In</button>
           </form>
+          <div className="signup-redirect">
+            <p>Don't have an account?</p>
+            <NavLink to="/signup">Sign up here</NavLink>
+          </div>
         </div>
       </div>
       <ChalkTray />
