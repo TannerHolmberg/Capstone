@@ -2,7 +2,7 @@
     padding-top: 50px;                      
     padding-left: 210px;                     
     width: calc(100% - 210px);
-    height: auto;
+    height: calc(100% - 100px);
     display: flex;
     flex-direction: column;
     background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
