@@ -1,9 +1,9 @@
 import './TopBar.css';
 
-const TopBar = () => {
+const TopBar = ({ message }) => {
     return ( 
         <div className="top-bar">
-            <h2>Welscome User!</h2>
+            <h2>{message}</h2>
             <button>Logout</button>
         </div>
      );

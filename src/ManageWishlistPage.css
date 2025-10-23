@@ -1,4 +1,4 @@
-.Main-container {
+.Main-container-wishlist {
     padding-top: 50px;                      
     padding-left: 210px;                     
     width: calc(100% - 210px);
@@ -10,14 +10,14 @@
     z-index: 0;
 }
 
-.Header-container {
+.Header-container-wishlist {
     margin-left: 50px;
     display: flex; 
     align-items: center; 
     gap: 12px;
 }
 
-.Header-container h1 {
+.Header-container-wishlist h1 {
     font-family: 'Handlee', cursive;
     color: rgba(255, 255, 255, 0.858);
     font-size: 30px;
@@ -30,7 +30,7 @@
     margin-left: 10px;
 }
 
-.list-container {
+.list-container-wishlist {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -38,7 +38,7 @@
     gap: 24px;
 }
 
-.List-box{
+.List-box-wishlist{
     width: 800px;
     height: 400px;
     background-color: #0D4629;

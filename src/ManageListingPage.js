@@ -2,13 +2,16 @@ import "./ManageListingPage.css";
 import NavLeft from './Components/NavLeft.js';
 import TopBar from './Components/TopBar.js';
 import books from "./images/books.png";
+import MobileNavbar from "./Components/MobileNavbar.js";
 import { NavLink } from "react-router-dom";
 
 function ManageListingPage() {
+    const greeting = "Manage your listings here!";
     return (
-        <div>
+        <div className="ManageListingPage">
             <NavLeft />
-            <TopBar />
+            <TopBar message={greeting}/>
+            <MobileNavbar />
             <div className="Main-container">
                 <div className="Header-container">
                     <h1>Your Listings</h1>

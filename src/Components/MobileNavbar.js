@@ -1,5 +1,7 @@
 import "./MobileNavbar.css";
 import { useRef, useEffect } from "react";
+import ChalkTray from "./ChalkTray";
+import { NavLink } from "react-router-dom";
 
 const MobileNavbar = () => {
   const hamburgerRef = useRef(null);
@@ -29,7 +31,17 @@ const MobileNavbar = () => {
         <span className="horizontal-bar"></span>
         <span className="horizontal-bar"></span>
       </div>
-      <div className="mobile-navbar-content" ref={contentRef}></div>
+      <div className="mobile-navbar-content" ref={contentRef}>
+        <div className="mobile-navbar-links">
+        <NavLink to="/dashboard" className="nav-link-mobile">Dashboard</NavLink>
+        <NavLink to="/map" className="nav-link-mobile">Map</NavLink>
+        <NavLink to="/managelistings" className="nav-link-mobile">Manage Listings</NavLink>
+        <NavLink to="/managewishlists" className="nav-link-mobile">Manage Wishlists</NavLink>
+        <NavLink to="/" className="nav-link-mobile">Messages</NavLink>
+        <NavLink to="/" className="nav-link-mobile">Profile</NavLink>
+        </div>
+        <ChalkTray className="c1" />
+      </div>
     </div>
   );
 };

@@ -11,6 +11,7 @@ import ManageListingPage from "./ManageListingPage";
 import CreateListingPage from "./CreateListingPage";
 import ManageWishlistPage from "./ManageWishlistPage";
 import AddWishlistPage from "./AddWishlistPage";
+import ParentDashboard from "./ParentDashboard";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/createlisting" element={<CreateListingPage />} />
         <Route path="/managewishlists" element={<ManageWishlistPage />} />
         <Route path="/addwishlist" element={<AddWishlistPage />} />
+        <Route path="/parentdashboard" element={<ParentDashboard />} />
       </Routes>
     </Router>
   );

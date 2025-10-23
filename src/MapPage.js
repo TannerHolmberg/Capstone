@@ -8,12 +8,12 @@ import MobileFilters from "./Components/Filters.js";
 
 function MapPage() {
   const { BaseLayer, Overlay } = LayersControl;
-
+  const title ="Map View";
   return (
     <div>
       <MobileNavbar />
       <NavLeft />
-      <TopBar />
+      <TopBar message={title}/>
       <MobileFilters />
       <div className="mainContent">
         <div className="map-wrapper">
@@ -25,13 +25,10 @@ function MapPage() {
             style={{ height: "100%", width: "100%" }}
           >
             <LayersControl position="topright">
-              {/* --- Base Layers --- */}
-              <BaseLayer checked name="Stamen Watercolor">
                 <TileLayer
                   url="https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/tile/{z}/{y}/{x}"
                   attribution='Tiles &copy; <a href="https://www.esri.com/">Esri</a> — Source: National Geographic, Esri, DeLorme, NAVTEQ, UNEP-WCMC, USGS, NASA, ESA, METI, NRCAN, GEBCO, NOAA, iPC'
                 />
-              </BaseLayer>
             </LayersControl>
 
             <Marker position={[32.7767, -96.7970]}>

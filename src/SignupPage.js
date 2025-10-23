@@ -15,36 +15,43 @@ function SignupPage() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [isTeacher, setIsTeacher] = useState(false);
+    const [schoolName, setSchoolName] = useState("");
+    const [isdName, setIsdName] = useState("");
     const navigate = useNavigate();
 
     const handleSignup = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        try {
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+    try {
+      const userCredential = await createUserWithEmailAndPassword(auth, email, password);
 
-            // Update display name in Firebase Auth
-            await updateProfile(userCredential.user, {
-            displayName: `${firstName} ${lastName}`,
-            });
+      await updateProfile(userCredential.user, {
+        displayName: `${firstName} ${lastName}`,
+      });
 
-            // Create Firestore document for user
-            await setDoc(doc(db, "users", userCredential.user.uid), {
-            uid: userCredential.user.uid,
-            firstName: firstName,
-            lastName: lastName,
-            email: email,
-            isTeacher: isTeacher,
-            createdAt: new Date(),
-            });
+      const userData = {
+        uid: userCredential.user.uid,
+        firstName,
+        lastName,
+        email,
+        isTeacher,
+        createdAt: new Date(),
+      };
 
-            alert("Account created successfully!");
-            console.log("User created:", userCredential.user);
-            navigate("/login");
-        } catch (err) {
-            alert(err.message);
-        }
-    };
+      // only include school info if isTeacher = true
+      if (isTeacher) {
+        userData.schoolName = schoolName;
+        userData.isdName = isdName;
+      }
+
+      await setDoc(doc(db, "users", userCredential.user.uid), userData);
+
+      alert("Account created successfully!");
+      navigate("/login");
+    } catch (err) {
+      alert(err.message);
+    }
+  };
 
     return ( 
         <div>
@@ -63,10 +70,36 @@ function SignupPage() {
                         <input type="Last" placeholder="Last Name" onChange={(e) => setLastName(e.target.value)} required />
                         <input type="email" placeholder="Email" onChange={(e) => setEmail(e.target.value)} required />
                         <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />  
-                        <div class="radio-group">
-                            <label for="teacher">Are you a Teacher?</label>
-                            <input type="checkbox" id="teacher" name="role" value="teacher" onChange={(e) => setIsTeacher(e.target.checked)} />
-                        </div>
+                        <div className="radio-group">
+              <label htmlFor="teacher">Are you a Teacher?</label>
+              <input
+                type="checkbox"
+                id="teacher"
+                name="role"
+                checked={isTeacher}
+                onChange={(e) => setIsTeacher(e.target.checked)}
+              />
+            </div>
+
+            {/* ✅ Show school + ISD fields only when checked */}
+            {isTeacher && (
+              <div className="teacher-extra-fields">
+                <input
+                  type="text"
+                  placeholder="School Name"
+                  value={schoolName}
+                  onChange={(e) => setSchoolName(e.target.value)}
+                  required={isTeacher}
+                />
+                <input
+                  type="text"
+                  placeholder="ISD Name"
+                  value={isdName}
+                  onChange={(e) => setIsdName(e.target.value)}
+                  required={isTeacher}
+                />
+              </div>
+            )}
                         <button type="submit">Create Account</button>
                     </form>
                     <div className="login-redirect">
