@@ -65,7 +65,7 @@ function SignupPage() {
                         <input type="password" placeholder="Password" onChange={(e) => setPassword(e.target.value)} required />  
                         <div class="radio-group">
                             <label for="teacher">Are you a Teacher?</label>
-                            <input type="checkbox" id="teacher" name="role" value="teacher" onChange={(e) => setIsTeacher(e.target.checked)} required />
+                            <input type="checkbox" id="teacher" name="role" value="teacher" onChange={(e) => setIsTeacher(e.target.checked)} />
                         </div>
                         <button type="submit">Create Account</button>
                     </form>
