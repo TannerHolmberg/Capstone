@@ -1,18 +1,18 @@
-import "./ManageListingPage.css";
+import "./ManageWishlistPage.css";
 import NavLeft from './Components/NavLeft.js';
 import TopBar from './Components/TopBar.js';
 import books from "./images/books.png";
 import { NavLink } from "react-router-dom";
 
-function ManageListingPage() {
+function ManageWishlistPage() {
     return (
         <div>
             <NavLeft />
             <TopBar />
             <div className="Main-container">
                 <div className="Header-container">
-                    <h1>Your Listings</h1>
-                    <img className="listing-pic" src={books} alt="Classroom Connect Logo" />
+                    <h1>Your Wishlists</h1>
+                    <img className="wishlist-pic" src={books} alt="Classroom Connect Logo" />
                 </div>
                 <div className="list-container">
                     <div className="List-box">
@@ -28,11 +28,11 @@ function ManageListingPage() {
                         <div className="listing-item">Listing 9</div>
                         <div className="listing-item">Listing 10</div>
                     </div>
-                    <NavLink to='/createlisting' className="add-listing-button">Add</NavLink>
+                    <NavLink to='/addwishlist' className="add-wishlist-button">Add</NavLink>
                 </div>
             </div>
         </div>
     );
 }
 
-export default ManageListingPage;
+export default ManageWishlistPage;

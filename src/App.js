@@ -8,6 +8,9 @@ import SignupPage from "./SignupPage";
 import MapPage from './MapPage';
 import Dashboard from "./Dashboard";
 import ManageListingPage from "./ManageListingPage";
+import CreateListingPage from "./CreateListingPage";
+import ManageWishlistPage from "./ManageWishlistPage";
+import AddWishlistPage from "./AddWishlistPage";
 
 function App() {
   return (
@@ -20,6 +23,9 @@ function App() {
         <Route path="/map" element={<MapPage />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/managelistings" element={<ManageListingPage />} />
+        <Route path="/createlisting" element={<CreateListingPage />} />
+        <Route path="/managewishlists" element={<ManageWishlistPage />} />
+        <Route path="/addwishlist" element={<AddWishlistPage />} />
       </Routes>
     </Router>
   );

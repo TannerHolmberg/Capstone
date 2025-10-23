@@ -9,7 +9,7 @@ const NavLeft = () => {
             <NavLink to='/dashboard' className="nav-link">Dashboard</NavLink>
             <NavLink to='/map' className="nav-link">Map</NavLink>
             <NavLink to='/managelistings' className="nav-link">Manage Listings</NavLink>
-            <NavLink to='/' className="nav-link">Manage WishLists</NavLink>
+            <NavLink to='/managewishlists' className="nav-link">Manage WishLists</NavLink>
             <NavLink to='/' className="nav-link">Messages</NavLink>
             <NavLink to='/' className="nav-link">Profile</NavLink>
 
