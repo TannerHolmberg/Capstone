@@ -9,13 +9,13 @@ function ManageWishlistPage() {
         <div>
             <NavLeft />
             <TopBar />
-            <div className="Main-container">
-                <div className="Header-container">
+            <div className="Main-container-wishlist">
+                <div className="Header-container-wishlist">
                     <h1>Your Wishlists</h1>
                     <img className="wishlist-pic" src={books} alt="Classroom Connect Logo" />
                 </div>
-                <div className="list-container">
-                    <div className="List-box">
+                <div className="list-container-wishlist">
+                    <div className="List-box-wishlist">
                         {/* Placeholder items to demonstrate scrolling. Replace with real listing components later. */}
                         <div className="listing-item">Listing 1</div>
                         <div className="listing-item">Listing 2</div>

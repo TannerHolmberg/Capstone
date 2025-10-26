@@ -4,25 +4,48 @@ import { useNavigate } from "react-router-dom";
 import logo from "./images/ClassroomConnect.png";
 import ChalkTray from "./Components/ChalkTray";
 import Navbar from "./Components/LoginSignUpLandingNavbar";
+import { doc, getDoc } from "firebase/firestore";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "./firebase";
+import { auth, db } from "./firebase";
 import "./LoginPage.css";
 import { NavLink } from "react-router-dom";
 
 function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [user, setUser] = useState(null);
   const navigate = useNavigate();
 
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
       console.log(email, password);
-      await signInWithEmailAndPassword(auth, email, password);
-      navigate("/dashboard");
-    } catch (err) {
-      alert(err.message);
-    }
+
+      const userCredential = await signInWithEmailAndPassword(auth, email, password);
+      const loggedInUser = userCredential.user; 
+
+      console.log("User UID:", loggedInUser.uid);
+      setUser(loggedInUser); 
+
+      const docRef = doc(db, "users", loggedInUser.uid);
+      const userDoc = await getDoc(docRef);
+
+      let teacher = false;
+
+      if (userDoc.exists()) {
+        const data = userDoc.data();
+        teacher = data.isTeacher;
+      }
+
+      if (teacher) {
+        navigate("/dashboard");
+      } else {
+        navigate("/parentdashboard");
+      }
+
+  } catch (err) {
+    alert(err.message);
+  }
   };
 
   return (
