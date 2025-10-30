@@ -66,6 +66,67 @@
     border: 1px solid rgba(255,255,255,0.06);
 }
 
+.listing-row{
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
+.listing-thumb{
+    width: 80px;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+}
+
+.listing-info{
+    font-family: 'Handlee', cursive;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.listing-actions{
+    margin-left: auto; /* push actions to the right */
+    display: flex;
+    align-items: center;
+}
+
+.delete-button{
+    font-family: 'Handlee', cursive;
+    background-color: #e74c3c;
+    color: #fff;
+    border: 3px solid gray;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+.delete-button:disabled{
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+.listing-title{
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.listing-meta{
+    font-size: 14px;
+    opacity: 0.95;
+}
+
+.listing-price{
+    font-size: 14px;
+}
+
+.listing-desc{
+    font-family: 'Handlee', cursive;
+    margin-top: 8px;
+}
+
 /* Hide scrollbar while keeping scrolling functional (WebKit browsers) */
 .List-box::-webkit-scrollbar{
     width: 0;
