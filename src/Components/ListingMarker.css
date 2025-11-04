@@ -1,0 +1,36 @@
+.listing-marker{
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background-color: rgb(216, 8, 8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 5px solid white;
+}
+
+.price-tag{
+    color: white;
+}
+
+.popup{
+    background-color: red;
+}
+
+.popup-content{
+    background-color: red;
+    color: white;
+}
+
+
+
+/* The little triangle “tip” under the popup */
+.leaflet-popup-tip {
+  display: none;
+}
+
+.popup-content {
+  width: 100%;
+  padding: 0;
+  color: white;
+}

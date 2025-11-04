@@ -42,6 +42,22 @@
     z-index: 1000; /* Ensure it appears above the map */
 }
 
+/* This is the main popup bubble */
+.leaflet-popup-content-wrapper {
+  background-color: #0F6239;
+}
+
+.popup{
+    background-color: red;;
+}
+
+.popup-title{
+    width: 100%;
+    font-weight: bold;
+    font-size: 16px;
+    background-color: red;
+}
+
 @media (max-width: 768px) {
 .mainContent{
     top: 0;

@@ -12,7 +12,7 @@
 
 .listing-form-containter{
     width: 50%;
-    height: 90%;
+    height: 80%;
     background-color: #0D4629;
     overflow-y: auto;
     outline: 5px solid #f27984;
@@ -107,7 +107,7 @@
     justify-content: flex-start;
     flex-direction: column;
     align-items: center;
-}
+    }
 
 .listing-form-containter{
     width: 90%;
@@ -116,6 +116,10 @@
     overflow-y: auto;
     outline: 5px solid #f27984;
     border-radius: 15px;
+}
+
+.listing-form{
+    padding: 50px 10px 50px 10px;
 }
 
 .listing-form input{
