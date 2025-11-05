@@ -93,3 +93,12 @@
     padding-left: 50px;
     padding-right: 50px;
 }
+
+.no-wishlist-text {
+  font-family: 'Handlee', cursive;
+  font-size: 22px;
+  color: #ffffffcc;
+  text-align: center;
+  margin-top: 40px;
+  letter-spacing: 1px;
+}
