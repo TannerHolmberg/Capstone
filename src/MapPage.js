@@ -33,55 +33,77 @@ function MapPage() {
   }
 
   const handleMessageSellerSend = async () => {
-
-      if(!messageForSeller.trim()){
-        alert("Message cannot be empty.");
-        return;
-      }
-
-      const senderUID = user;
-      const receiverUID = selectedSeller;
-
-      let check1 = senderUID + "_" + receiverUID;
-      let check2 = receiverUID + "_" + senderUID;
-
-      let docRef1 = doc(db, "messages", check1);
-      let docRef2 = doc(db, "messages", check2);
-
-      const docSnap1 = await getDoc(docRef1);
-      const docSnap2 = await getDoc(docRef2);
-
-      if(docSnap1.exists() || docSnap2.exists()){
-        alert("You have already messaged this seller.");
-        return;
-      }
-      
-      console.log("Sending message from", senderUID, "to", receiverUID, ":", messageForSeller);
-
-      let docRef = doc(db, "messages", `${senderUID}_${receiverUID}`);
-
-      setDoc(docRef, {
-        senderUID: senderUID,
-        receiverUID: receiverUID,
-      })
-
-      await addDoc(collection(docRef, "messages"), {
-        text: messageForSeller,
-        sender: user,
-        timestamp: new Date(),
-      });
-
-      Swal.fire({
-              title: "Wishlist Created!",
-              text: "Your wishlist has been successfully added.",
-              icon: "success",
-              showConfirmButton: false,
-              timer: 1500,
-            }).then(() => {
-              setMessageForSeller("");
-              setShowMessagePopup(false);
-            });
+  if (!messageForSeller.trim()) {
+    alert("Message cannot be empty.");
+    return;
   }
+
+  const senderUID = user;
+  const receiverUID = selectedSeller;
+
+  let chatID1 = `${senderUID}_${receiverUID}`;
+  let chatID2 = `${receiverUID}_${senderUID}`;
+
+  let docRef1 = doc(db, "messages", chatID1);
+  let docRef2 = doc(db, "messages", chatID2);
+
+  const docSnap1 = await getDoc(docRef1);
+  const docSnap2 = await getDoc(docRef2);
+
+  // If chat exists in either direction use that chatID
+  let chatID = chatID1;
+  if (docSnap1.exists()) chatID = chatID1;
+  else if (docSnap2.exists()) chatID = chatID2;
+
+  // Prevent duplicate chat creation
+  if (docSnap1.exists() || docSnap2.exists()) {
+    alert("You have already messaged this seller.");
+    return;
+  }
+
+  console.log("Sending message from", senderUID, "to", receiverUID, ":", messageForSeller);
+
+  // --- Create main messages document ---
+  const chatRef = doc(db, "messages", chatID);
+  await setDoc(chatRef, {
+    users: [senderUID, receiverUID],
+    createdAt: new Date()
+  });
+
+  // --- Add first message ---
+  await addDoc(collection(chatRef, "messages"), {
+    text: messageForSeller,
+    sender: senderUID,
+    timestamp: new Date(),
+  });
+
+  // --- CREATE USER CHAT REFERENCES ---
+  await setDoc(doc(db, "users", senderUID, "chats", chatID), {
+    otherUser: receiverUID,
+    chatID: chatID,
+    lastMessage: messageForSeller,
+    timestamp: new Date()
+  });
+
+  await setDoc(doc(db, "users", receiverUID, "chats", chatID), {
+    otherUser: senderUID,
+    chatID: chatID,
+    lastMessage: messageForSeller,
+    timestamp: new Date()
+  });
+
+  // --- UI cleanup ---
+  Swal.fire({
+    title: "Message Sent!",
+    text: "Your message has been delivered.",
+    icon: "success",
+    showConfirmButton: false,
+    timer: 1500,
+  }).then(() => {
+    setMessageForSeller("");
+    setShowMessagePopup(false);
+  });
+};
 
   const handleMessageSellerClose = () => {
     setShowMessagePopup(false);  // hide it

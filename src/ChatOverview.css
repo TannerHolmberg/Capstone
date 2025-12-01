@@ -1,0 +1,32 @@
+.chat-overview-container {
+  padding: 20px;
+}
+
+.chat-card {
+  border: 4px solid #f27984;
+  padding: 12px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  background: #0D4629;
+  cursor: pointer;
+  transition: background 0.2s, border-color 0.2s;
+  color: white;
+  width: 80%;
+}
+
+.chat-card:hover {
+  background: #17814a;
+  border-color: #bbb;
+}
+
+.chat-card-name {
+  display: block;
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+
+.chat-card-last-message {
+  color: rgb(227, 225, 225);
+  margin-top: 5px;
+  font-size: 0.95rem;
+}

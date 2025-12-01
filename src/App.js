@@ -13,6 +13,7 @@ import ManageWishlistPage from "./ManageWishlistPage";
 import AddWishlistPage from "./AddWishlistPage";
 import ParentDashboard from "./ParentDashboard";
 import MessageChatPage from "./MessageChatPage";
+import ChatOverview from "./ChatOverview";
 
 function App() {
   return (
@@ -29,7 +30,8 @@ function App() {
         <Route path="/managewishlists" element={<ManageWishlistPage />} />
         <Route path="/addwishlist" element={<AddWishlistPage />} />
         <Route path="/parentdashboard" element={<ParentDashboard />} />
-        <Route path="/messagechat" element={<MessageChatPage />} />
+        <Route path="/messagechat/:chatId" element={<MessageChatPage />} />
+        <Route path="/chatoverview" element={<ChatOverview />} />
       </Routes>
     </Router>
   );
