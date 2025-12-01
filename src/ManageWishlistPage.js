@@ -137,7 +137,8 @@ function ManageWishlistPage() {
             ) : (
               wishlists.map((item) => (
                 <div key={item.id} className="wishlist-item">
-                  <p>{item.name || "Untitled Wishlist"}</p>
+                  <a>{item.name || "Untitled Wishlist"}</a>
+                  <a s></a>
                   <button
                     onClick={() => handleDelete(item.id)}
                     disabled={deletingIds.includes(item.id)}

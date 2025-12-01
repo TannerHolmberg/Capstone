@@ -44,19 +44,215 @@
 
 /* This is the main popup bubble */
 .leaflet-popup-content-wrapper {
-  background-color: #0F6239;
+  background-color: #f27984;
+  border-radius: 30px 30px 0 0;
+  border: none;
+  padding-bottom: 50px;
 }
 
-.popup{
-    background-color: red;;
+.main-content-popup{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+
 }
+
+.listing-price-popup{
+    font-weight: bold;
+    font-size: 25px;
+    padding: 0;
+    margin: 0;
+    color: black;
+}
+
+
+
+
+
+
+.popup .leaflet-popup-content-wrapper::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -18px; /* how far below popup it sits */
+  left: 0;
+  width: 100%;
+  height: 80px;  /* thickness of the ferrule */
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  background: linear-gradient(
+    to bottom,
+    #8a8a8a 0%,
+    #8a8a8a 33%,
+    #cfcfcf 33%,
+    #cfcfcf 66%,
+    #8a8a8a 66%,
+    #8a8a8a 100%
+  );
+  z-index: 10;
+}
+
+
 
 .popup-title{
     width: 100%;
     font-weight: bold;
-    font-size: 16px;
-    background-color: red;
+    font-size: 25px;
+    background-color: black;
+    color: #f27984;
+    display: flex;
+    justify-content: center;
 }
+
+.listing-description-popup{
+    width: 100%;
+    color: black;
+    margin: 0;
+    border: 2px solid black;
+    padding: 5px;
+    border-radius: 8px;
+}
+
+.message-seller-button{
+    width: 120px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    border: 5px solid #f27984;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    box-sizing: border-box;
+
+    transition: 0.3s all ease;
+}
+
+.message-seller-button:hover {
+    background-color: #7b3e43;
+}
+
+#messageSellerPopup {
+  position: fixed;
+  inset: 0; /* shorthand for top:0; right:0; bottom:0; left:0 */
+  z-index: 9999; /* way above map/navbars/etc */
+}
+
+.message-popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.message-popup-content {
+  position: relative;
+  background: #f27984;
+  color: black;
+  padding: 0 5px 5px 5px;
+  border-radius: 12px 12px 12px 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+  min-width: 400px;
+  height: 200px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 9999999999;
+  box-shadow: inset -2px 0 3px rgba(255, 255, 255, 0.5),
+              inset 2px 0 4px rgba(0, 0, 0, 0.2);
+}
+
+.message-popup-header{
+    width: 370px;
+    height: 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+}
+
+.message-popup-header p {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 10px;
+    padding: 0;
+    color: black;
+}
+
+.message-popup-content textarea {
+    width: 370px;
+    height: 100px;
+    background: none;
+    border: solid 2px black;
+    color: white;
+    margin-left: 10px
+}
+
+.message-popup-content textarea::placeholder {
+    color: white;
+    opacity: 0.7;
+}
+
+.message-popup-body{
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+    padding-right: 50px;
+}
+
+.message-popup-body button {
+    width: 60px;
+    padding: 10px;
+    border-radius: 6px;
+    background-color: black;
+    color: white;
+    border: 5px solid #f27984;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+    margin-left: 20px;
+    transition: 0.3s all ease;
+}
+
+.message-popup-body button:hover {
+    border: solid 3px black;
+}
+
+.close-btn {
+    color: black;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    float: right;
+    padding-top: 5px;
+}
+
+.EraserTail{
+    background: #F27984;
+    background: linear-gradient(90deg, rgba(242, 121, 132, 1) 0%, rgba(255, 173, 183, 1) 89%);
+    width: 100px;
+    height: 205px;
+    border-radius: 0 12px 12px 0;
+    position: absolute;
+    right: -90px;
+    top: 0;
+    z-index: 0;
+    box-shadow: inset -2px 0 3px rgba(255, 255, 255, 0.5)
+}
+
+
 
 @media (max-width: 768px) {
 .mainContent{

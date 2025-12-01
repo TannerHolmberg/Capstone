@@ -11,10 +11,86 @@ import { onAuthStateChanged } from "firebase/auth";
 import { collection, addDoc, doc, setDoc, getDoc, getDocs } from "firebase/firestore";
 import ListingMarker from "./Components/ListingMarker";
 import MarkerIcon from "./images/MarkerIcon.png";
+import Swal from "sweetalert2";
+
 
 function MapPage() {
   const [user, setUser] = useState(null);
   const [listings, setListings] = useState([]);
+  const [messageForSeller, setMessageForSeller] = useState("");
+  const [showMessagePopup, setShowMessagePopup] = useState(false);
+  const [selectedSeller, setSelectedSeller] = useState("");
+
+
+  const handleMessageSeller = (uid) => {
+    console.log("Preparing to message seller with UID:", uid);
+    setSelectedSeller(uid);      // save the seller’s UID
+    setShowMessagePopup(true);   // show the popup
+  };
+
+  const handleMessageSellerChange = (e) => {
+    setMessageForSeller(e.target.value);
+  }
+
+  const handleMessageSellerSend = async () => {
+
+      if(!messageForSeller.trim()){
+        alert("Message cannot be empty.");
+        return;
+      }
+
+      const senderUID = user;
+      const receiverUID = selectedSeller;
+
+      let check1 = senderUID + "_" + receiverUID;
+      let check2 = receiverUID + "_" + senderUID;
+
+      let docRef1 = doc(db, "messages", check1);
+      let docRef2 = doc(db, "messages", check2);
+
+      const docSnap1 = await getDoc(docRef1);
+      const docSnap2 = await getDoc(docRef2);
+
+      if(docSnap1.exists() || docSnap2.exists()){
+        alert("You have already messaged this seller.");
+        return;
+      }
+      
+      console.log("Sending message from", senderUID, "to", receiverUID, ":", messageForSeller);
+
+      let docRef = doc(db, "messages", `${senderUID}_${receiverUID}`);
+
+      setDoc(docRef, {
+        senderUID: senderUID,
+        receiverUID: receiverUID,
+      })
+
+      await addDoc(collection(docRef, "messages"), {
+        text: messageForSeller,
+        sender: user,
+        timestamp: new Date(),
+      });
+
+      Swal.fire({
+              title: "Wishlist Created!",
+              text: "Your wishlist has been successfully added.",
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            }).then(() => {
+              setMessageForSeller("");
+              setShowMessagePopup(false);
+            });
+  }
+
+  const handleMessageSellerClose = () => {
+    setShowMessagePopup(false);  // hide it
+    setSelectedSeller(null);     // optional: clear the selected seller
+  };
+
+  useEffect(() => {
+    console.log(messageForSeller)
+  }, [messageForSeller]);
 
   useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -77,23 +153,30 @@ function MapPage() {
   listing.lat && listing.lng && (
     <Marker
       key={listing.id}
-      position={[listing.lat, listing.lng]}   // 👈 use your custom PNG here
+      position={[listing.lat, listing.lng]}   
       icon={ListingMarker({ listing }).props.icon}
     >
       <Popup className="popup">
+
         <div className = "popup-title">
         <strong>{listing.title}</strong><br />
         </div>
-        <p>${listing.price}<br /></p>
-        {listing.description}<br />
-        <em>{listing.location?.city}, {listing.location?.state}</em><br />
-        {listing.images && listing.images.length > 0 && (
-          <img
-            src={listing.images[0]}
-            alt={listing.title}
-            style={{ width: "100px", borderRadius: "5px", marginTop: "5px" }}
-          />
-        )}
+
+        <div className="main-content-popup">
+          <div>
+            <p className="listing-price-popup">${listing.price}<br /></p>
+            
+          </div>
+          {listing.images && listing.images.length > 0 && (
+            <img
+              src={listing.images[0]}
+              alt={listing.title}
+              style={{ width: "200px", borderRadius: "5px", marginTop: "5px", border: "2px solid black" }}
+            />
+          )}
+        </div>
+        <p className="listing-description-popup">{listing.description}<br /></p>
+        <button className="message-seller-button" onClick={() => handleMessageSeller(listing.id)}>Message Seller</button>
       </Popup>
     </Marker>
   )
@@ -103,6 +186,22 @@ function MapPage() {
           
         </div>
       </div>
+      {showMessagePopup && (
+        <div id="messageSellerPopup" className="message-popup-overlay">
+          <div className="message-popup-content">
+            <div className="EraserTail"></div>
+            <div className="message-popup-header">
+              <p>Message Seller</p>
+              <button className="close-btn" onClick={handleMessageSellerClose}>X</button>
+            </div>
+            <div className="message-popup-body">
+            <textarea onChange={handleMessageSellerChange} placeholder="Type your message..." />
+            <button onClick={handleMessageSellerSend}>Send</button>
+            </div>
+          </div>
+          
+        </div>
+        )}
     </div>
   );
 }

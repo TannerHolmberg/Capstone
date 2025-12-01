@@ -29,6 +29,7 @@ function CreateListingPage() {
         city: "",
         state: "",
         tags: "",
+        posterUID: "",
         lat: coords.lat,
         lng: coords.lng,
     });
@@ -81,13 +82,13 @@ function CreateListingPage() {
       tags: tagList,
       location: { city: form.city, state: form.state },
       createdAt: new Date(),
+      posterUID: user.uid,
       lat: coords.lat,
       lng: coords.lng,
       images: imageUrls,
     };
 
     console.log("Ready to upload listing:", listingData);
-    // 🔜 next step: upload images to Firebase Storage, then store Firestore doc
     const docRef = await addDoc(collection(db, "listings"), listingData);
     console.log("Created listing with ID:", docRef.id);
 
