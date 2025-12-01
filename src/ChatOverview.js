@@ -60,12 +60,17 @@ const ChatOverview = () => {
 
       setChats(chatList);
       setLoading(false);
+
     };
 
     fetchChats();
   }, []);
 
     const greeting = "Chat Overview";
+
+    if (loading) {
+    return <LoadingPage />; // or a custom div with loader.gif
+  }
     return (
     <div>
       <NavLeft />
