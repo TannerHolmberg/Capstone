@@ -200,7 +200,7 @@ function MapPage() {
           )}
         </div>
         <p className="listing-description-popup">{listing.description}<br /></p>
-        <button className="message-seller-button" onClick={() => handleMessageSeller(listing.uid)}>Message Seller</button>
+        <button className="message-seller-button" onClick={() => handleMessageSeller(listing.posterUID)}>Message Seller</button>
       </Popup>
     </Marker>
   )
