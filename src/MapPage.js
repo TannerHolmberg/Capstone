@@ -55,6 +55,8 @@ function MapPage() {
   if (docSnap1.exists()) chatID = chatID1;
   else if (docSnap2.exists()) chatID = chatID2;
 
+  console.log("Determined chatID:", chatID);
+
   // Prevent duplicate chat creation
   if (docSnap1.exists() || docSnap2.exists()) {
     alert("You have already messaged this seller.");
@@ -198,7 +200,7 @@ function MapPage() {
           )}
         </div>
         <p className="listing-description-popup">{listing.description}<br /></p>
-        <button className="message-seller-button" onClick={() => handleMessageSeller(listing.id)}>Message Seller</button>
+        <button className="message-seller-button" onClick={() => handleMessageSeller(listing.uid)}>Message Seller</button>
       </Popup>
     </Marker>
   )
