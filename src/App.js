@@ -14,6 +14,7 @@ import AddWishlistPage from "./AddWishlistPage";
 import ParentDashboard from "./ParentDashboard";
 import MessageChatPage from "./MessageChatPage";
 import ChatOverview from "./ChatOverview";
+import ProfilePage from "./ProfilePage";
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
         <Route path="/parentdashboard" element={<ParentDashboard />} />
         <Route path="/messagechat/:chatId" element={<MessageChatPage />} />
         <Route path="/chatoverview" element={<ChatOverview />} />
+        <Route path="/profile" element={<ProfilePage />} />
       </Routes>
     </Router>
   );

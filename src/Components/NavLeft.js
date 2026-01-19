@@ -11,7 +11,7 @@ const NavLeft = () => {
             <NavLink to='/managelistings' className="nav-link">Manage Listings</NavLink>
             <NavLink to='/managewishlists' className="nav-link">Manage WishLists</NavLink>
             <NavLink to='/chatoverview' className="nav-link">Messages</NavLink>
-            <NavLink to='/' className="nav-link">Profile</NavLink>
+            <NavLink to='/profile' className="nav-link">Profile</NavLink>
 
         </div>
      );
