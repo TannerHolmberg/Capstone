@@ -14,7 +14,9 @@ import AddWishlistPage from "./AddWishlistPage";
 import ParentDashboard from "./ParentDashboard";
 import MessageChatPage from "./MessageChatPage";
 import ChatOverview from "./ChatOverview";
-
+import ISDSearchPage from "./ISDSearchPage";
+import ISDTeacherList from "./ISDTeacherList";
+import SearchProfile from "./SearchProfile";
 function App() {
   return (
     <Router>
@@ -32,6 +34,9 @@ function App() {
         <Route path="/parentdashboard" element={<ParentDashboard />} />
         <Route path="/messagechat/:chatId" element={<MessageChatPage />} />
         <Route path="/chatoverview" element={<ChatOverview />} />
+        <Route path="/isdsearch" element={<ISDSearchPage />} />
+        <Route path="/isdteacherlist/:isdName" element={<ISDTeacherList />} />
+        <Route path="/searchprofile/:teacherName" element={<SearchProfile />} />
       </Routes>
     </Router>
   );

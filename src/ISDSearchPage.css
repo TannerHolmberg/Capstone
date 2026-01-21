@@ -1,0 +1,45 @@
+.Main-container-isdsearch {
+    padding-top: 50px;                      
+    padding-left: 210px;                     
+    width: calc(100% - 210px);
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+    overflow: hidden;
+    z-index: 0;
+}
+
+#Search-box-isdsearch{
+    width: 400px;
+    height: 500px;
+    padding-top: 20px;
+    background-color: #0D4629;
+    margin-bottom: 0;
+}
+
+.isd-results-container{
+    width: 90%;
+    height: 250px;
+    background-color: #155d38;
+    border: solid 1px white;
+    border-radius: 20px;
+    overflow-y: auto;
+    scrollbar-color: white transparent;
+}
+
+.isd-item{
+    width: 70%;
+    height: auto;
+    border-bottom: solid 1px white;
+    transition: all 0.3s ease-in-out;
+    margin-bottom: 10px;
+}
+
+
+
+.isd-item:hover{
+    background-color: #f27984;
+    color: black;
+    border-radius: 20px;;
+}

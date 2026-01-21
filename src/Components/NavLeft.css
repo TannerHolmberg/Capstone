@@ -38,6 +38,10 @@
     transition: background-color 0.3s ease;
 }
 
+.nav-link:hover{
+    background-color: #f27984;
+}
+
 @media (max-width: 768px) {
  .nav-left{
     display: none;

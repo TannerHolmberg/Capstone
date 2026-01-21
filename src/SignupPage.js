@@ -19,6 +19,10 @@ function SignupPage() {
     const [isdName, setIsdName] = useState("");
     const navigate = useNavigate();
 
+    function normalize(text) {
+      return text.trim().toLowerCase().replace(/\s+/g, '');
+    }
+
     const handleSignup = async (e) => {
     e.preventDefault();
 
@@ -41,7 +45,20 @@ function SignupPage() {
       // only include school info if isTeacher = true
       if (isTeacher) {
         userData.schoolName = schoolName;
-        userData.isdName = isdName;
+        userData.isdName = normalize(isdName);
+        const teacherData ={
+          teacherName: `${firstName} ${lastName}`,
+          schoolName: schoolName,
+          isdName: normalize(isdName),
+          email: email,
+          searchName: normalize(`${firstName} ${lastName}`),
+        }
+
+        await setDoc(doc(db, "teachers", userCredential.user.uid), teacherData);
+        await setDoc(doc(db, "isds", normalize(isdName)), {
+          displayName: isdName,
+          searchKey: normalize(isdName),
+        });
       }
 
       await setDoc(doc(db, "users", userCredential.user.uid), userData);

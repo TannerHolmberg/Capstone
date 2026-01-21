@@ -40,7 +40,7 @@ function LoginPage() {
       if (teacher) {
         navigate("/dashboard");
       } else {
-        navigate("/parentdashboard");
+        navigate("/isdsearch");
       }
 
   } catch (err) {
