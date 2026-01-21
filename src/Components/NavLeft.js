@@ -12,7 +12,7 @@ const NavLeft = () => {
             <NavLink to='/managewishlists' className="nav-link">Manage WishLists</NavLink>
             <NavLink to='/chatoverview' className="nav-link">Messages</NavLink>
             <NavLink to='/isdsearch' className="nav-link">Teacher Search</NavLink>
-            <NavLink to='/' className="nav-link">Profile</NavLink>
+            <NavLink to='/profile' className="nav-link">Profile</NavLink>
         </div>
      );
 }

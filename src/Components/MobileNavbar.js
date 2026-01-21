@@ -38,7 +38,7 @@ const MobileNavbar = () => {
         <NavLink to="/managelistings" className="nav-link-mobile">Manage Listings</NavLink>
         <NavLink to="/managewishlists" className="nav-link-mobile">Manage Wishlists</NavLink>
         <NavLink to="/" className="nav-link-mobile">Messages</NavLink>
-        <NavLink to="/" className="nav-link-mobile">Profile</NavLink>
+        <NavLink to="/profile" className="nav-link-mobile">Profile</NavLink>
         </div>
         <ChalkTray className="c1" />
       </div>
