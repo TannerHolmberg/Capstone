@@ -10,6 +10,12 @@ import family from "./images/family.png";
 import wallet from "./images/Wallet.png";
 import OutsideFooter from "./Components/Footer";
 import PushPin from "./Components/PushPin";
+import Bulb from './images/icons8-bulb-96.png';
+import Glass from './images/glass.png';
+import Trust from './images/trust.png';
+import Teaching from './images/teaching.png';
+
+
 
 function LandingPage() {
   return (
@@ -53,22 +59,49 @@ function LandingPage() {
             <div className="pushPinTop">
                 <PushPin />
               </div>
+            <h2 className="PostitHeader">How It Works</h2>
+            <div className="postItImage">
+              <img src={Bulb} alt="Light Bulb" />
+            </div>
           </div>
           <div className="postItContainer">
             <div className="postIt2" id="postItGreen">
               <div className="pushPinTop">
                 <PushPin />
               </div>
+              <h2 className="PostitHeaderSub">Post and Browse Listings</h2>
+              <div className="postItImage">
+                <img src={Glass} alt="Magnifying Glass" />
+              </div>
+              <div className="postItText">
+                <p>Teachers share supplies or find affordable items.</p>
+              </div>
             </div>
             <div className="postIt2" id="postItBlue">
               <div className="pushPinTop">
                 <PushPin />
               </div>
+            <h2 className="PostitHeaderSub">Give to Teachers</h2>
+            <div className="postItImage">
+            <img src={Trust} alt="Hand holding heart" />
+            </div>
+            <div className="postItText">
+                <p>Parents shop wishlists directly for classrooms.</p>
+              </div>
+
             </div>
             <div className="postIt2" id="postItPink">
               <div className="pushPinTop">
                 <PushPin />
               </div>
+            <h2 className="PostitHeaderSub">Equip Classrooms</h2>
+            <div className="postItImage">
+            <img src={Teaching} alt="School supplies" />
+            </div>
+            <div className="postItText">
+              <p>Students benefit from better-supplied learning.</p>
+            </div>
+
             </div>
           </div>
         </section>
