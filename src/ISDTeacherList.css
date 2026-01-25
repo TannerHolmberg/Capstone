@@ -1,0 +1,59 @@
+  @media (max-width: 768px){
+    body{
+        background-color: #155d38;
+    }
+    .mobile-top-greeting-isdsearch{
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        padding-left: 80px;
+        border-radius: 0 0 20px 20px;
+        border-bottom: solid 3px white;
+        background-color: #062515;
+    }
+
+    .mobile-top-greeting-isdsearch h2{
+        font-family: 'Handlee', cursive;
+        color: white;
+        font-size: 28px;
+    }
+
+    .Main-container-isdsearch{
+        height: 100vh;
+        width: 100vw;
+        padding: 0;
+        display: flex;
+        align-items: center;
+    }
+
+    #Search-box-isdsearch{
+        background-color: transparent;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .Search-input-isdsearch{
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        width: 90%;
+        border: solid 3px #F8ca30;
+        border-radius: 20px;
+        padding: 10px;
+    }
+
+    .Search-results-isdsearch{
+        width: 95%;
+    }
+
+    .isd-results-container{
+        width: 100%;
+        border: solid 3px #f27984;
+        width: 100%;
+    }
+
+
+
+  }

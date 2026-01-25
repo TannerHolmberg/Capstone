@@ -74,6 +74,7 @@ const AddWishlistPage = () => {
   };
 
   return (
+    <div>
     <div className="add-wishlist-page">
       <NavLeft />
       <TopBar message={greeting} />
@@ -116,7 +117,9 @@ const AddWishlistPage = () => {
           </div>
         </div>
       </div>
-      <ChalkTray />
+      
+    </div>
+    <ChalkTray />
     </div>
   );
 };

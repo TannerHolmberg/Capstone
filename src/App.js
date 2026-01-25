@@ -35,6 +35,8 @@ function App() {
         <Route path="/parentdashboard" element={<ParentDashboard />} />
         <Route path="/messagechat/:chatId" element={<MessageChatPage />} />
         <Route path="/chatoverview" element={<ChatOverview />} />
+        <Route path="/isdsearch" element={<ISDSearchPage />} />
+        <Route path="/isdteacherlist/:isdName" element={<ISDTeacherList />} />
       </Routes>
     </Router>
   );

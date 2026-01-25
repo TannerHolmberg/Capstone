@@ -114,3 +114,34 @@
     align-self: flex-start;
     text-align: left;
 }
+
+@media (max-width: 768px) {
+  .Main-container {
+    width: 100%;
+    height: calc(100vh);
+    align-items: center;
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+
+
+  }
+
+  .chat-name-container {
+    margin-left: 0;
+  }
+
+  .chat-box-container {
+    flex-direction: column;
+    margin-left: 0;
+    gap: 16px;
+    width: 100%;
+    align-items: center;
+  }
+
+  .Chat-box {
+    width: 90vw;
+    height: 60vh;
+    padding: 10px;
+  }
+}

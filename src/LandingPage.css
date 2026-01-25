@@ -150,9 +150,18 @@ body {
     margin: 50px 30px 0 30px;
     display: flex;
     justify-content: space-between;
-    padding: 0 30px 0 30px;
+    padding: 0 30px 40px 30px;
     display: flex;
     align-items: center;
+}
+
+.pushPinTop{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    height: 20px;
+    align-items: center;
+    margin-top: 5px;
 }
 
 #postItGreen{
@@ -260,7 +269,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 0;
+    padding: 0 0 30px 0;
     margin: 0;
     gap: 0;
 }
@@ -308,6 +317,19 @@ th {
     display: none;
 }
 
+#reportCardButton1{
+    background-color: #F1D473;
+    color: black;
+    border: red solid 5px;
+}
+
+#reportCardButton2{
+    background-color: #F1D473;
+    color: black;
+    border: blue solid 5px;
+}
+
+
 @media (min-width: 768px) and (max-width: 991px) {
 .Landing-Goal-mobile{
     display: block;
@@ -327,8 +349,8 @@ th {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 0;
-    margin: 0;
+    margin-top: 60px;
+    padding-top: 60px;
 }
 
 svg{
@@ -432,7 +454,7 @@ table{
         justify-content: center;
         align-items: center;
         padding: 0;
-        margin: 0;
+        margin: 60px 0 0 0;
     }
 
     .landing-quote-subtext{

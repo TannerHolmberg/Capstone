@@ -131,6 +131,7 @@ function ManageListingPage() {
             <TopBar message={greeting}/>
             <MobileNavbar />
             <div className="Main-container">
+                
                 <div className="Header-container">
                     <h1>Your Listings</h1>
                     <img className="listing-pic" src={books} alt="Classroom Connect Logo" />

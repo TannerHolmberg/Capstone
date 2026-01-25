@@ -8,6 +8,8 @@ import ChalkTray from "./Components/ChalkTray";
 import dollarBag from "./images/dollarBag.png";
 import family from "./images/family.png";
 import wallet from "./images/Wallet.png";
+import OutsideFooter from "./Components/Footer";
+import PushPin from "./Components/PushPin";
 
 function LandingPage() {
   return (
@@ -47,11 +49,27 @@ function LandingPage() {
         <section className="bullitenBoard">
           <div className="bullitenBorderL"></div>
           <div className="bullitenBorderR"></div>
-          <div className="postIt1"></div>
+          <div className="postIt1">
+            <div className="pushPinTop">
+                <PushPin />
+              </div>
+          </div>
           <div className="postItContainer">
-            <div className="postIt2" id="postItGreen"></div>
-            <div className="postIt2" id="postItBlue"></div>
-            <div className="postIt2" id="postItPink"></div>
+            <div className="postIt2" id="postItGreen">
+              <div className="pushPinTop">
+                <PushPin />
+              </div>
+            </div>
+            <div className="postIt2" id="postItBlue">
+              <div className="pushPinTop">
+                <PushPin />
+              </div>
+            </div>
+            <div className="postIt2" id="postItPink">
+              <div className="pushPinTop">
+                <PushPin />
+              </div>
+            </div>
           </div>
         </section>
         <div className="bullitenDivider"></div>
@@ -100,10 +118,11 @@ function LandingPage() {
           </table>
           <p className="reportCardText">Join today!</p>
           <div>
-                    <button className="BrowseListingsButton">Browse<br />Wishlists</button>
-                    <button className="PostListingsButton">Post<br />Listings</button>
+                    <button id="reportCardButton1" className="BrowseListingsButton">Browse<br />Wishlists</button>
+                    <button id="reportCardButton2" className="PostListingsButton">Post<br />Listings</button>
                 </div>
         </section>
+      <OutsideFooter />
     </div>
   );
 }

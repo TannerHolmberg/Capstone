@@ -122,6 +122,7 @@ function ManageWishlistPage() {
     <div>
       <NavLeft />
       <TopBar />
+      <MobileNavbar />
       <div className="Main-container-wishlist">
         <div className="Header-container-wishlist">
           <h1>Your Wishlists</h1>

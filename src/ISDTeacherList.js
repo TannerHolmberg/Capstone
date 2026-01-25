@@ -88,11 +88,16 @@ const ISDTeacherList = () => {
         <NavLeft />
         <MobileNavbar />
         <TopBar message={greeting}/>
+        <div className="mobile-top-greeting-isdsearch">
+            <h2>Search for Your Teacher<br/><br/></h2>
+        </div>
         <div className="Main-container-isdsearch">
             <div className="Inner-container-isdsearch">
                 <div id="Search-box-isdsearch" className="login-form">
-                    <label>Filter By Typing Name</label>
-                    <input onChange={handleChange} type="text" placeholder="Enter Teachers Name" />
+                    <div className="Search-input-isdsearch">
+                        <label>Filter By Typing Name</label>
+                        <input onChange={handleChange} type="text" placeholder="Enter Teachers Name" />
+                    </div>
                     <div className="Search-results-isdsearch">
                     <h3>Teachers:</h3>
                     <div className="isd-results-container">

@@ -76,22 +76,25 @@ const ChatOverview = () => {
       <NavLeft />
       <MobileNavbar />
       <TopBar message={greeting} />
+      
       <div className="add-listing-main-content">
-
+      <div className="mobile-header-chatoverview">
+        <h2>Your Messages</h2>
+      </div>
       <div className="chat-overview-container">
-  {chats.length === 0 && <p>No chats yet.</p>}
+      {chats.length === 0 && <p>No chats yet.</p>}
 
-  {chats.map((chat) => (
-    <div
-      key={chat.id}
-      className="chat-card"
-      onClick={() => navigate(`/messagechat/${chat.id}`)}
-    >
-      <strong className="chat-card-name">{chat.name}</strong>
-      <p className="chat-card-last-message">{chat.lastMessage}</p>
-    </div>
-  ))}
-</div>
+      {chats.map((chat) => (
+        <div
+          key={chat.id}
+          className="chat-card"
+          onClick={() => navigate(`/messagechat/${chat.id}`)}
+        >
+          <strong className="chat-card-name">{chat.name}</strong>
+          <p className="chat-card-last-message">{chat.lastMessage}</p>
+        </div>
+      ))}
+      </div>
       </div>
     </div>
   );

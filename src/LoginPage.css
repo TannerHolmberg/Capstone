@@ -1,6 +1,7 @@
 
 body {
   padding-top: 60px;  
+  background-color: #0D4629;
 }
 
 .login-container {
@@ -101,10 +102,9 @@ body {
   @media (max-width: 768px){
     .login-container {
         flex-direction: column;
-        height: auto;
         padding-bottom: 50px;
-        height: calc(100vh - 60px);
-          background: #0F6239;
+        height: calc(100vh - 90px);
+        background: #0F6239;
 
     }
 

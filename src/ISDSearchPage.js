@@ -79,11 +79,16 @@ const ISDSearchPage = () => {
         <NavLeft />
         <MobileNavbar />
         <TopBar message={greeting}/>
+        <div className="mobile-top-greeting-isdsearch">
+            <h2>Search for Your Teachers ISD</h2>
+        </div>
         <div className="Main-container-isdsearch">
             <div className="Inner-container-isdsearch">
                 <div id="Search-box-isdsearch" className="login-form">
-                    <label>Filter By Typing Name</label>
-                    <input onChange={handleChange} type="text" placeholder="Enter School District Name" />
+                    <div className="Search-input-isdsearch">
+                        <label>Filter By Typing Name</label>
+                        <input onChange={handleChange} type="text" placeholder="Enter School District Name" />
+                    </div>
                     <div className="Search-results-isdsearch">
                     <h3>ISDs:</h3>
                     <div className="isd-results-container">

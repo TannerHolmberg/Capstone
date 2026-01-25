@@ -1,5 +1,6 @@
 import NavLeft from "./Components/NavLeft.js";
 import TopBar from "./Components/TopBar.js";
+import MobileNavbar from "./Components/MobileNavbar.js";
 import { useEffect, useState, useRef } from "react";
 import { collection, query, orderBy, onSnapshot, addDoc, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "./firebase";
@@ -79,6 +80,7 @@ function MessageChatPage() {
   return (
     <div>
       <NavLeft />
+      <MobileNavbar />
       <TopBar message={"Message User"} />
       <div className="Main-container">
         <div className="chat-name-container">

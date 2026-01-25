@@ -30,3 +30,45 @@
   margin-top: 5px;
   font-size: 0.95rem;
 }
+
+.mobile-header-chatoverview{
+    display: none;  
+}
+
+@media (max-width: 768px) {
+
+  .mobile-header-chatoverview{
+    display: flex;
+    width: 100%;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    border-radius: 0 0 20px 20px;
+    border-bottom: solid 3px white;
+    background-color: #062515;
+    margin-bottom: 20px;
+    font-family: 'Handlee', cursive;
+  }
+
+  .chat-overview-container {
+    padding: 0;
+    width: 100vw;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .chat-card {
+    width: 90%;
+    padding: 10px;
+  }
+
+  .chat-card-name {
+    font-size: 1rem;
+  }
+
+  .chat-card-last-message {
+    font-size: 0.9rem;
+  }
+}
