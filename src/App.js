@@ -37,6 +37,7 @@ function App() {
         <Route path="/chatoverview" element={<ChatOverview />} />
         <Route path="/isdsearch" element={<ISDSearchPage />} />
         <Route path="/isdteacherlist/:isdName" element={<ISDTeacherList />} />
+        <Route path="/profile/:user" element={<ProfilePage />} />
       </Routes>
     </Router>
   );
