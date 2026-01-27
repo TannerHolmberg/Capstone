@@ -1,0 +1,214 @@
+.Main-container {
+    padding-top: 50px;                      
+    padding-left: 210px;                     
+    width: calc(100% - 210px);
+    height: calc(100% - 100px);
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+    overflow-y: auto;
+    z-index: 0;
+}
+
+.Header-container {
+    margin-left: 50px;
+    display: flex; 
+    align-items: center; 
+    gap: 12px;
+}
+
+.Header-container h1 {
+    font-family: 'Handlee', cursive;
+    color: rgba(255, 255, 255, 0.858);
+    font-size: 30px;
+}
+
+.list-container {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 5px;
+    gap: 24px;
+}
+
+.List-box {
+    width: 800px;
+    height: 400px;
+    background-color: #0D4629;
+    border: 5px solid #f27984;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    gap: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.List-box::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.listing-item {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.listing-row {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+}
+
+.listing-thumb {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+}
+
+.listing-info {
+    flex: 1;
+}
+
+.listing-title {
+    font-weight: bold;
+    color: #fff;
+    margin-bottom: 4px;
+}
+
+.listing-meta {
+    font-size: 14px;
+    color: #ccc;
+    margin-bottom: 4px;
+}
+
+.listing-price {
+    color: #4ade80;
+    font-weight: bold;
+}
+
+.listing-desc {
+    color: #ddd;
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+.list-container-wishlist {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-top: 5px;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.List-box-wishlist {
+    width: 800px;
+    height: 400px;
+    background-color: #0D4629;
+    border: 5px solid #f27984;
+    border-radius: 15px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    gap: 16px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow-y: auto;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    margin-left: 40px;
+    margin-bottom: 20px;
+}
+
+.List-box-wishlist::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+}
+
+.wishlist-item {
+    background: rgba(255, 255, 255, 0.06);
+    color: #fff;
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.no-wishlist-text {
+    font-family: 'Handlee', cursive;
+    font-size: 22px;
+    color: #ffffffcc;
+    text-align: center;
+    margin-top: 40px;
+    letter-spacing: 1px;
+}
+
+.loading-text {
+    font-family: 'Handlee', cursive;
+    font-size: 22px;
+    color: #ffffffcc;
+    text-align: center;
+    margin-top: 40px;
+}
+
+@media (max-width: 768px) {
+    .Main-container {
+        padding: 0;
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .list-container {
+        flex-direction: column;
+        align-items: center;
+        justify-content: first baseline;
+        margin-left: 0;
+        width: 95%;
+        gap: 12px;
+    }
+
+    .List-box {
+        width: 90%;
+        height: 60vh;
+        margin-left: 0;
+        margin-bottom: 0px;
+    }
+
+    .Header-container {
+        justify-content: center;
+        margin-left: 0;
+        padding: 10px;
+        border-radius: 0 0 20px 20px;
+        border-bottom: solid 3px white;
+        background-color: #062515;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .list-container-wishlist {
+        flex-direction: column;
+        align-items: center;
+        justify-content: first baseline;
+        margin-left: 0;
+        width: 95%;
+        gap: 12px;
+    }
+
+    .List-box-wishlist {
+        width: 90%;
+        height: 60vh;
+    }
+}
