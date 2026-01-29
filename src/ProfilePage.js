@@ -98,6 +98,15 @@ function ProfilePage() {
             <TopBar message="Profile"/>
             <div className="Main-container">
                 
+                <div className="description-container">
+                    <div className="profile-picture-img"> 
+                        <p>A picture will go here</p>
+                    </div>
+                    <div className="user-description">
+                        <p>This is where the user description will go.</p>
+                    </div>
+                </div>
+
                 <div className="Header-container">
                     <h1>Your listings</h1>
                 </div>
