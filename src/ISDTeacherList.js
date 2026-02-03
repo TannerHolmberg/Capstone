@@ -80,7 +80,7 @@ const ISDTeacherList = () => {
     };
 
     const handleSelect = (teacher) => {
-        Navigate(`/searchprofile/${teacher.searchName}`);
+        Navigate(`/searchprofile/${teacher.id}`);
         setResults([]);
     };
 

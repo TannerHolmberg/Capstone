@@ -37,6 +37,14 @@
     margin-bottom: 20px;
 }
 
+.profile-pic-details-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
 .user-description {
     width: 800px;
     height: auto;
@@ -239,5 +247,13 @@
     .List-box-wishlist {
         width: 90%;
         height: 60vh;
+    }
+
+    .Teacher-details-container {
+        color:#ffffff;
+        font: 'Homemade Apple', cursive;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
     }
 }

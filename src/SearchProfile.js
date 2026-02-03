@@ -15,27 +15,28 @@ import "./SearchProfile.css";
 const SearchProfile = () => {
     const greeting = "Teacher Profile";
 
-    const { tName } = useParams();
+    const { teacherId } = useParams();
+    console.log("teacherId from params:", teacherId);
 
     const [listings, setListings] = useState([]);
     const [wishlists, setWishlists] = useState([]);
-    const [loading, setLoading] = useState(true); // true when the user's `users/{uid}/listings` collection is empty or doesn't exist
+    const [loading, setLoading] = useState(true); // true when `teachers/teacherID/listings` collection is empty or doesn't exist
     const [noListings, setNoListings] = useState(false);
     const [noWishlists, setNoWishlists] = useState(false);
+    const [teacherName, setTeacherName] = useState("Unknown Teacher");
+    const [teacherISD, setTeacherISD] = useState("Unknown ISD");
+    const [teacherSchool, setTeacherSchool] = useState("Unknown School");
     
         useEffect(() => {
         // Fetch the teacher's listings and wishlists based on the URL parameter
         const fetchTeacherData = async () => {
             setLoading(true);
             try {
-                // Query for teacher by name
-                const teachersQuery = query(
-                    collection(db, "teachers"),
-                    where("name", "==", tName)
-                );
-                const teachersSnap = await getDocs(teachersQuery);
+                // Fetch teacher document by ID
+                const teacherDocRef = doc(db, "users", teacherId);
+                const teacherSnap = await getDoc(teacherDocRef);
 
-                if (teachersSnap.empty) {
+                if (!teacherSnap.exists()) {
                     setListings([]);
                     setWishlists([]);
                     setNoListings(true);
@@ -44,12 +45,12 @@ const SearchProfile = () => {
                     return;
                 }
 
-                // Get the first matching teacher's UID
-                const teacherDoc = teachersSnap.docs[0];
-                const teacherId = teacherDoc.id;
+                setTeacherName(teacherSnap.data().name || "Unknown Teacher");
+                setTeacherISD(teacherSnap.data().isdName || "Unknown ISD");
+                setTeacherSchool(teacherSnap.data().schoolName || "Unknown School");
 
                 // get references to teacher's listings
-                const userListingsCol = collection(db, "teachers", teacherId, "listings");
+                const userListingsCol = collection(db, "users", teacherId, "listings");
                 const userListingsSnap = await getDocs(userListingsCol);
                 // mark whether the user's listings collection is empty or doesn't exist
                 setNoListings(userListingsSnap.empty);
@@ -70,7 +71,7 @@ const SearchProfile = () => {
                 if (finalListings.length > 0) setNoListings(false);
 
                 // Get teacher's wishlist references
-                const userWishlistsCol = collection(db, "teachers", teacherId, "wishlists");
+                const userWishlistsCol = collection(db, "users", teacherId, "wishlists");
                 const userWishlistSnap = await getDocs(userWishlistsCol);
                 setNoWishlists(userWishlistSnap.empty);
 
@@ -104,10 +105,10 @@ const SearchProfile = () => {
             }
         };
 
-        if (tName) {
+        if (teacherId) {
             fetchTeacherData();
         }
-    }, [tName]);
+    }, [teacherId]);
 
     return (
         <div>
@@ -117,44 +118,22 @@ const SearchProfile = () => {
             <div className="Main-container">
                 
                 <div className="description-container">
-                    <div className="profile-picture-img"> 
-                        <p>A picture will go here</p>
+                    <div className="profile-pic-details-container">
+                        <div className="profile-picture-img"> 
+                            <p>A picture will go here</p>
+                        </div>
+                        <div className="Teacher-details-container">
+                            <h2>Teacher Name: {teacherName}</h2>
+                            <h3>ISD: {teacherISD}</h3>
+                            <h3>School: {teacherSchool}</h3>
+                        </div>
                     </div>
+                    
                     <div className="user-description">
                         <p>This is where the user description will go.</p>
                     </div>
                 </div>
-
-                <div className="Header-container">
-                    <h1>Your listings</h1>
-                </div>
-                <div className="list-container">
-                    <div className="List-box">
-                        {loading ? (
-                            <div className="listing-item">Loading listings...</div>
-                        ) : noListings ? (
-                            <div className="listing-item">No listings</div>
-                        ) : listings.length === 0 ? (
-                            <div className="listing-item">No listings yet.</div>
-                        ) : (
-                            listings.map((l) => (
-                                <div className="listing-item" key={l.id}>
-                                    <div className="listing-row">
-                                        {l.images && l.images[0] ? (
-                                            <img className="listing-thumb" src={l.images[0]} alt={l.title} />
-                                        ) : null}
-                                        <div className="listing-info">
-                                            <div className="listing-title">{l.title || 'Untitled'}</div>
-                                            <div className="listing-meta">{l.location?.city || ''}{l.location?.state ? `, ${l.location?.state}` : ''}</div>
-                                            <div className="listing-price">${typeof l.price === 'number' ? l.price.toFixed(2) : l.price}</div>
-                                        </div>
-                                    </div>
-                                    {l.description ? <div className="listing-desc">{l.description}</div> : null}
-                                </div>
-                            ))
-                        )}
-                    </div>
-                </div>
+                
                 <div className="Header-container">
                     <h1>Your wishlists</h1>
                 </div>

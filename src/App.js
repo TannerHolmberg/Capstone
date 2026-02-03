@@ -38,7 +38,7 @@ function App() {
         <Route path="/isdsearch" element={<ISDSearchPage />} />
         <Route path="/isdteacherlist/:isdName" element={<ISDTeacherList />} />
         <Route path="/profile/:user" element={<ProfilePage />} />
-        <Route path="/searchprofile/:teacherName" element={<SearchProfile />} />
+        <Route path="/searchprofile/:teacherId" element={<SearchProfile />} />
       </Routes>
     </Router>
   );
