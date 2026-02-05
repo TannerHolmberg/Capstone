@@ -33,7 +33,7 @@ const SearchProfile = () => {
             setLoading(true);
             try {
                 // Fetch teacher document by ID
-                const teacherDocRef = doc(db, "users", teacherId);
+                const teacherDocRef = doc(db, "teachers", teacherId);
                 const teacherSnap = await getDoc(teacherDocRef);
 
                 if (!teacherSnap.exists()) {
@@ -45,7 +45,7 @@ const SearchProfile = () => {
                     return;
                 }
 
-                setTeacherName(teacherSnap.data().name || "Unknown Teacher");
+                setTeacherName(teacherSnap.data().teacherName || "Unknown Teacher");
                 setTeacherISD(teacherSnap.data().isdName || "Unknown ISD");
                 setTeacherSchool(teacherSnap.data().schoolName || "Unknown School");
 
@@ -108,6 +108,7 @@ const SearchProfile = () => {
         if (teacherId) {
             fetchTeacherData();
         }
+
     }, [teacherId]);
 
     return (
@@ -123,7 +124,7 @@ const SearchProfile = () => {
                             <p>A picture will go here</p>
                         </div>
                         <div className="Teacher-details-container">
-                            <h2>Teacher Name: {teacherName}</h2>
+                            <h2>Name: {teacherName}</h2>
                             <h3>ISD: {teacherISD}</h3>
                             <h3>School: {teacherSchool}</h3>
                         </div>
@@ -151,6 +152,15 @@ const SearchProfile = () => {
                             ))
                         )}
                     </div>
+                </div>
+                <div className="Header-container">
+                    <h3>Message this teacher</h3>
+                </div>
+                <div className="messaging-container">
+                    <div className="message-textbox">
+                        <textarea placeholder="Type your message here..."></textarea>
+                    </div>
+                    <div className="send-message-button">Send Message</div>
                 </div>
             </div>
         </div>
