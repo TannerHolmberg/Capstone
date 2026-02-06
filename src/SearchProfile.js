@@ -8,8 +8,9 @@ import LoadingPage from "./Components/LoadingPage";
 //import "./ISDSearchPage.css";
 import { db, auth } from "./firebase";
 import { NavLink } from "react-router-dom";
-import { collection, getDocs, doc, getDoc, deleteDoc, query, where } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, deleteDoc, query, where, addDoc, setDoc } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Swal from "sweetalert2";
 import "./SearchProfile.css";
 
 const SearchProfile = () => {
@@ -20,14 +21,130 @@ const SearchProfile = () => {
 
     const [listings, setListings] = useState([]);
     const [wishlists, setWishlists] = useState([]);
-    const [loading, setLoading] = useState(true); // true when `teachers/teacherID/listings` collection is empty or doesn't exist
+    const [loading, setLoading] = useState(true);
     const [noListings, setNoListings] = useState(false);
     const [noWishlists, setNoWishlists] = useState(false);
     const [teacherName, setTeacherName] = useState("Unknown Teacher");
     const [teacherISD, setTeacherISD] = useState("Unknown ISD");
     const [teacherSchool, setTeacherSchool] = useState("Unknown School");
+    const [user, setUser] = useState(null);
+    const [messageText, setMessageText] = useState("");
     
-        useEffect(() => {
+    useEffect(() => {
+        const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+            if (currentUser) {
+                setUser(currentUser.uid);
+                console.log("Logged in user:", currentUser.uid);
+            } else {
+                setUser(null);
+                console.log("No user logged in");
+            }
+        });
+        return () => unsubscribe();
+    }, []);
+
+    const navigate = useNavigate();
+
+    const handleMessageSend = async () => {
+        if (!messageText.trim()) {
+            alert("Message cannot be empty.");
+            return;
+        }
+
+        const senderUID = user;
+        const receiverUID = teacherId;
+
+        let chatID1 = `${senderUID}_${receiverUID}`;
+        let chatID2 = `${receiverUID}_${senderUID}`;
+
+        let docRef1 = doc(db, "messages", chatID1);
+        let docRef2 = doc(db, "messages", chatID2);
+
+        const docSnap1 = await getDoc(docRef1);
+        const docSnap2 = await getDoc(docRef2);
+
+        // If chat exists in either direction use that chatID
+        let chatID = chatID1;
+        let chatExists = false;
+
+        if (docSnap1.exists()) {
+            chatID = chatID1;
+            chatExists = true;
+        } else if (docSnap2.exists()) {
+            chatID = chatID2;
+            chatExists = true;
+        }
+
+        console.log("Determined chatID:", chatID, "Exists:", chatExists);
+
+        try {
+            // Create main messages document if it doesn't exist
+            if (!chatExists) {
+                const chatRef = doc(db, "messages", chatID);
+                await setDoc(chatRef, {
+                    users: [senderUID, receiverUID],
+                    createdAt: new Date()
+                });
+
+                // create user chat references for new chat
+                await setDoc(doc(db, "users", senderUID, "chats", chatID), {
+                    otherUser: receiverUID,
+                    chatID: chatID,
+                    lastMessage: messageText,
+                    timestamp: new Date()
+                });
+
+                await setDoc(doc(db, "users", receiverUID, "chats", chatID), {
+                    otherUser: senderUID,
+                    chatID: chatID,
+                    lastMessage: messageText,
+                    timestamp: new Date()
+                });
+            }
+
+            // Add message to the chat
+            const chatRef = doc(db, "messages", chatID);
+            await addDoc(collection(chatRef, "messages"), {
+                text: messageText,
+                sender: senderUID,
+                timestamp: new Date(),
+            });
+
+            // Update last message for existing chat
+            if (chatExists) {
+                await setDoc(doc(db, "users", senderUID, "chats", chatID), {
+                    lastMessage: messageText,
+                    timestamp: new Date()
+                }, { merge: true });
+
+                await setDoc(doc(db, "users", receiverUID, "chats", chatID), {
+                    lastMessage: messageText,
+                    timestamp: new Date()
+                }, { merge: true });
+            }
+
+            Swal.fire({
+                title: "Message Sent!",
+                text: "Your message has been delivered.",
+                icon: "success",
+                showConfirmButton: false,
+                timer: 1500,
+            }).then(() => {
+                navigate(`/messagechat/${chatID}`)
+            });
+
+        } catch (error) {
+            console.error("Error sending message:", error);
+            Swal.fire({
+                title: "Error",
+                text: "Failed to send message. Please try again.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+        }
+    };
+    
+    useEffect(() => {
         // Fetch the teacher's listings and wishlists based on the URL parameter
         const fetchTeacherData = async () => {
             setLoading(true);
@@ -158,9 +275,13 @@ const SearchProfile = () => {
                 </div>
                 <div className="messaging-container">
                     <div className="message-textbox">
-                        <textarea placeholder="Type your message here..."></textarea>
+                        <textarea 
+                            placeholder="Type your message here..."
+                            value={messageText}
+                            onChange={(e) => setMessageText(e.target.value)}
+                        ></textarea>
                     </div>
-                    <div className="send-message-button">Send Message</div>
+                    <div className="send-message-button" onClick={handleMessageSend}>Send Message</div>
                 </div>
             </div>
         </div>
