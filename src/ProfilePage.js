@@ -4,160 +4,140 @@ import TopBar from './Components/TopBar.js';
 import { useParams } from "react-router-dom";
 import { db, auth } from "./firebase";
 import { NavLink } from "react-router-dom";
-import { collection, getDocs, doc, getDoc, deleteDoc, query, where } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc,  deleteDoc, query, where } from "firebase/firestore";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import MobileNavbar from "./Components/MobileNavbar";
 import React, { useState, useEffect } from "react";
+import ChalkTray from "./Components/ChalkTray";
+import { getStorage, ref, uploadBytes, getDownloadURL } from "firebase/storage";
 
 function ProfilePage() {
-    const { userID } = useParams();
+  const greeting = "Edit Profile";
 
-    const [listings, setListings] = useState([]);
-    const [wishlists, setWishlists] = useState([]);
-    const [loading, setLoading] = useState(true); // true when the user's `users/{uid}/listings` collection is empty or doesn't exist
-    const [noListings, setNoListings] = useState(false);
-    const [noWishlists, setNoWishlists] = useState(false);
-    
-        useEffect(() => {
-        // subscribe to auth state so we can fetch when user is available
-        const auth = getAuth();
-        const unsubscribe = onAuthStateChanged(auth, async (user) => {
-            setLoading(true);
-            try {
-                if (!user) {
-                    setListings([]);
-                    setWishlists([]);
-                    setNoListings(false);
-                    setNoWishlists(false);
-                    setLoading(false);
-                    return;
-                }
+  const [displayName, setDisplayName] = useState("");
+  const [bio, setBio] = useState("");
+  const [profileImage, setProfileImage] = useState("");
+  const [imageFile, setImageFile] = useState(null);
 
-                // get references to user's listings. Stored under users/{uid}/listings
-                const userListingsCol = collection(db, "users", user.uid, "listings");
-                const userListingsSnap = await getDocs(userListingsCol);
-                // mark whether the user's listings collection is empty or doesn't exist
-                setNoListings(userListingsSnap.empty);
-                const listingIds = userListingsSnap.docs
-                    .map((d) => d.data().listingId)
-                    .filter(Boolean);
+  const auth = getAuth();
+  const storage = getStorage();
 
-                // fetch listing documents
-                const listingPromises = listingIds.map(async (id) => {
-                    const listingDoc = await getDoc(doc(db, "listings", id));
-                    if (listingDoc.exists()) return { id: listingDoc.id, ...listingDoc.data() };
-                    return null;
-                });
 
-                const results = await Promise.all(listingPromises);
-                const finalListings = results.filter(Boolean);
-                setListings(finalListings);
-                if (finalListings.length > 0) setNoListings(false);
+//LOAD PROFILE ON PAGE LOAD
+  useEffect(() => {
+    const loadProfile = async () => {
+      const user = auth.currentUser;
+      if (!user) return;
 
-                // Get user's wishlist references
-                const userWishlistsCol = collection(db, "users", user.uid, "wishlists");
-                const userWishlistSnap = await getDocs(userWishlistsCol);
-                setNoWishlists(userWishlistSnap.empty);
+      const profileRef = doc(db, "users", user.uid, "profile", "info");
+      const snap = await getDoc(profileRef);
 
-                // Extract global wishlist IDs
-                const wishlistIds = userWishlistSnap.docs
-                    .map((d) => d.data().wishlistId)
-                    .filter(Boolean);
+      if (snap.exists()) {
+        const data = snap.data();
+        setDisplayName(data.displayName || "");
+        setBio(data.bio || "");
+        setProfileImage(data.photoURL || "");
+      }
+    };
 
-                // Fetch actual wishlist data from global collection
-                const wishlistPromises = wishlistIds.map(async (id) => {
-                    const wishlistDoc = await getDoc(doc(db, "wishlists", id));
-                    if (wishlistDoc.exists())
-                        return { id: wishlistDoc.id, ...wishlistDoc.data() };
-                    return null;
-                });
+    loadProfile();
+  }, []);
 
-                const wishlistResults = await Promise.all(wishlistPromises);
-                const finalWishlists = wishlistResults.filter(Boolean);
-                setWishlists(finalWishlists);
-                if (finalWishlists.length > 0) setNoWishlists(false);
-            } 
-            catch (err) {
-                console.error("Error loading listings and wishlists:", err);
-                setListings([]);
-                setWishlists([]);
-                setNoListings(false);
-                setNoWishlists(false);
-            } 
-            finally {
-                setLoading(false);
-            }
-        });
+// IMG Selection
+  const handleImageChange = (e) => {
+    if (e.target.files && e.target.files[0]) {
+      setImageFile(e.target.files[0]);
+      setProfileImage(URL.createObjectURL(e.target.files[0])); // preview
+    }
+  };
 
-        return () => unsubscribe();
-    }, []);
+ // SAVE PROFILE TO FIREBASE
+  const handleSave = async () => {
+    const user = auth.currentUser;
+    if (!user) return;
 
-    return (
-        <div>
-            <NavLeft />
-            <TopBar message="Profile"/>
-            <div className="Main-container">
-                
-                <div className="description-container">
-                    <div className="profile-picture-img"> 
-                        <p>A picture will go here</p>
-                    </div>
-                    <div className="user-description">
-                        <p>This is where the user description will go.</p>
-                    </div>
-                </div>
+    let photoURL = profileImage;
 
-                <div className="Header-container">
-                    <h1>Your listings</h1>
-                </div>
-                <div className="list-container">
-                    <div className="List-box">
-                        {loading ? (
-                            <div className="listing-item">Loading listings...</div>
-                        ) : noListings ? (
-                            <div className="listing-item">No listings</div>
-                        ) : listings.length === 0 ? (
-                            <div className="listing-item">No listings yet.</div>
-                        ) : (
-                            listings.map((l) => (
-                                <div className="listing-item" key={l.id}>
-                                    <div className="listing-row">
-                                        {l.images && l.images[0] ? (
-                                            <img className="listing-thumb" src={l.images[0]} alt={l.title} />
-                                        ) : null}
-                                        <div className="listing-info">
-                                            <div className="listing-title">{l.title || 'Untitled'}</div>
-                                            <div className="listing-meta">{l.location?.city || ''}{l.location?.state ? `, ${l.location?.state}` : ''}</div>
-                                            <div className="listing-price">${typeof l.price === 'number' ? l.price.toFixed(2) : l.price}</div>
-                                        </div>
-                                    </div>
-                                    {l.description ? <div className="listing-desc">{l.description}</div> : null}
-                                </div>
-                            ))
-                        )}
-                    </div>
-                </div>
-                <div className="Header-container">
-                    <h1>Your wishlists</h1>
-                </div>
-                <div className="list-container-wishlist">
-                    <div className="List-box-wishlist">
-                        {loading ? (
-                            <div className="loading-text">Loading wishlists...</div>
-                        ) : noWishlists ? (
-                            <div className="no-wishlist-text">No wishlists found</div>
-                        ) : (
-                            wishlists.map((item) => (
-                                <div key={item.id} className="wishlist-item">
-                                    <a>{item.name || "Untitled Wishlist"}</a>
-                                </div>
-                            ))
-                        )}
-                    </div>
-                </div>
-            </div>
-        </div>
+    // Upload image if a new one was selected
+    if (imageFile) {
+      const imageRef = ref(storage, `profileImages/${user.uid}`);
+      await uploadBytes(imageRef, imageFile);
+      photoURL = await getDownloadURL(imageRef);
+    }
+
+    const profileData = {
+      displayName,
+      bio,
+      photoURL,
+      updatedAt: new Date(),
+    };
+
+    await setDoc(
+      doc(db, "users", user.uid, "profile", "info"),
+      profileData,
+      { merge: true }
     );
+
+    alert("Profile saved successfully!");
+  };
+
+  return (
+    <div>
+      <MobileNavbar />
+      <NavLeft />
+      <TopBar message={greeting} />
+
+      <div className="profile-main-container">
+        <div className="profile-card">
+          {/* Profile Picture */}
+          <div className="profile-image-section">
+            <img
+              src={profileImage || "/default-avatar.png"}
+              // alt="Profile" (need to make its own container and probably move it around. looks ugly if allowed to stay)
+              className="profile-image"
+            />
+            <label className="upload-btn">
+              Change Photo
+              <input type="file" accept="image/*" hidden onChange={handleImageChange} />
+            </label>
+          </div>
+
+          {/* Profile Fields */}
+          <div className="profile-fields">
+            <label>Display Name</label>
+            <input
+              type="text"
+              value={displayName}
+              onChange={(e) => setDisplayName(e.target.value)}
+            />
+
+            <label>About You</label>
+            <textarea
+              rows="4"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+            />
+          </div>
+
+          {/* Navigation */}
+          <div className="profile-actions">
+            <NavLink to="/managelistings" className="profile-link-btn">
+              My Listings
+            </NavLink>
+            <NavLink to="/managewishlists" className="profile-link-btn">
+              My Wishlists
+            </NavLink>
+          </div>
+
+          <button className="save-profile-btn" onClick={handleSave}>
+            Save Changes
+          </button>
+        </div>
+      </div>
+
+      <ChalkTray />
+    </div>
+  );
 }
 
 export default ProfilePage;
