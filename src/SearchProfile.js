@@ -29,7 +29,33 @@ const SearchProfile = () => {
     const [teacherSchool, setTeacherSchool] = useState("Unknown School");
     const [user, setUser] = useState(null);
     const [messageText, setMessageText] = useState("");
+    const [displayName, setDisplayName] = useState("");
+    const [bio, setBio] = useState("This user did not write a bio.");
+    const [profileImage, setProfileImage] = useState("/user.png");
     
+    const auth = getAuth();
+    //const storage = getStorage();
+
+    //LOAD PROFILE ON PAGE LOAD
+    useEffect(() => {
+        const loadProfile = async () => {
+          const user = auth.currentUser;
+          if (!user) return;
+    
+          const profileRef = doc(db, "users", teacherId, "profile", "info");
+          const snap = await getDoc(profileRef);
+    
+          if (snap.exists()) {
+            const data = snap.data();
+            setDisplayName(data.displayName || teacherName);
+            setBio(data.bio || "");
+            setProfileImage(data.photoURL || "");
+          }
+        };
+    
+        loadProfile();
+    }, []);
+
     useEffect(() => {
         const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
             if (currentUser) {
@@ -237,18 +263,19 @@ const SearchProfile = () => {
                 
                 <div className="description-container">
                     <div className="profile-pic-details-container">
-                        <div className="profile-picture-img"> 
-                            <p>A picture will go here</p>
-                        </div>
+                        <img
+                            src={profileImage}
+                            // alt="Profile" (need to make its own container and probably move it around. looks ugly if allowed to stay)
+                            className="profile-picture-img"
+                        />
                         <div className="Teacher-details-container">
                             <h2>Name: {teacherName}</h2>
-                            <h3>ISD: {teacherISD}</h3>
                             <h3>School: {teacherSchool}</h3>
                         </div>
                     </div>
                     
                     <div className="user-description">
-                        <p>This is where the user description will go.</p>
+                        <p> {bio} </p>
                     </div>
                 </div>
                 

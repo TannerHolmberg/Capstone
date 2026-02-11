@@ -36,12 +36,13 @@
 }
 
 .profile-picture-img {
-    width: 120px;
-    height: 120px;
-    object-fit: cover;
-    border-radius: 8px;
-    margin-left: 40px;
-    margin-bottom: 20px;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 3px solid #fff;
+  margin-left: 35px;
 }
 
 .profile-pic-details-container {
