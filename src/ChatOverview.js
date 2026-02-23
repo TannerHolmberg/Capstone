@@ -5,7 +5,7 @@ import LoadingPage from "./Components/LoadingPage";
 import { useEffect, useState } from "react";
 import { getAuth } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
-import { collection, getDocs, doc, getDoc } from "firebase/firestore";
+import { collection, getDocs, doc, getDoc, setDoc, serverTimestamp } from "firebase/firestore";
 import { db, auth } from "./firebase"; // your firebase config file
 import "./ChatOverview.css";
 
@@ -66,6 +66,23 @@ const ChatOverview = () => {
     fetchChats();
   }, []);
 
+  const setTimeCheck = async (chatId) => {
+    try {
+      const auth = getAuth();
+      const user = auth.currentUser;
+      const uid = user.uid;
+    await setDoc(
+      doc(db, "messages", chatId),
+      {
+        [`${uid}_lastSeenAt`]: serverTimestamp(),
+      },
+      { merge: true } // keeps existing data
+    );
+  } catch (error) {
+    console.error("Error updating last seen:", error);
+  }
+  }
+
     const greeting = "Chat Overview";
 
     if (loading) {
@@ -88,7 +105,8 @@ const ChatOverview = () => {
         <div
           key={chat.id}
           className="chat-card"
-          onClick={() => navigate(`/messagechat/${chat.id}`)}
+          onClick={() => {setTimeCheck(chat.id);
+            navigate(`/messagechat/${chat.id}`)}}
         >
           <strong className="chat-card-name">{chat.name}</strong>
           <p className="chat-card-last-message">{chat.lastMessage}</p>

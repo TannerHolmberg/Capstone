@@ -35,27 +35,40 @@ function MessageChatPage() {
   }, [chatId, user]);
 
   // Fetch other user's name
-  useEffect(() => {
+useEffect(() => {
+  const fetchOtherUser = async () => {
     if (!chatId || !user) return;
 
-    const fetchOtherUser = async () => {
-      const chatDocRef = doc(db, "messages", chatId);
-      const chatSnap = await getDoc(chatDocRef);
-      if (chatSnap.exists()) {
-        const chatData = chatSnap.data();
-        const otherUID = chatData.users.find(uid => uid !== user.uid);
+    const chatDocRef = doc(db, "messages", chatId);
+    const chatSnap = await getDoc(chatDocRef);
 
-        const otherUserRef = doc(db, "users", otherUID);
-        const otherUserSnap = await getDoc(otherUserRef);
-        if (otherUserSnap.exists()) {
-          const { firstName, lastName } = otherUserSnap.data();
-          setOtherUserName(`${firstName} ${lastName}`);
-        }
-      }
-    };
+    if (!chatSnap.exists()) return;
 
-    fetchOtherUser();
-  }, [chatId, user]);
+    const chatData = chatSnap.data();
+
+    // ✅ protect against undefined users array
+    if (!Array.isArray(chatData.users)) {
+      console.warn("users field missing in chat:", chatId);
+      return;
+    }
+
+    const otherUID = chatData.users.find(
+      uid => uid !== user.uid
+    );
+
+    if (!otherUID) return;
+
+    const otherUserRef = doc(db, "users", otherUID);
+    const otherUserSnap = await getDoc(otherUserRef);
+
+    if (otherUserSnap.exists()) {
+      const { firstName, lastName } = otherUserSnap.data();
+      setOtherUserName(`${firstName} ${lastName}`);
+    }
+  };
+
+  fetchOtherUser();
+}, [chatId, user]);
 
   const handleSendMessage = async () => {
     if (!typedMessage.trim()) return;
