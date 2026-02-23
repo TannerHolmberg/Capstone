@@ -21,6 +21,7 @@ const Dashboard = () => {
     const [listingsCount, setListingsCount] = useState(0);
     const [wishlistsCount, setWishlistsCount] = useState(0);
     const [totalListingViews, setTotalListingViews] = useState(0);
+    const [loading, setLoading] = useState(true);
     const location = useLocation();
 
     useEffect(() => {
@@ -54,15 +55,21 @@ const Dashboard = () => {
     useEffect(() => {
         if (!user) return;
 
-        refreshDashboard();
-        countListings();
-        countWishlists();
-        countTotalListingViews();
+        const fetchAllData = async () => {
+            setLoading(true); // start loading
+
+            await refreshDashboard();
+            await countListings();
+            await countWishlists();
+            await countTotalListingViews();
+
+            setLoading(false); // stop loading
+        };
+
+        fetchAllData();
 
         const interval = setInterval(refreshDashboard, 30000);
-
         return () => clearInterval(interval);
-
     }, [user]);
 
         const countUnreadMessages = async (chat) => {
@@ -138,7 +145,11 @@ const Dashboard = () => {
     }
 
     setUnReadMessagesCount(sum);
-};
+    };
+
+    if (loading) {
+        return <LoadingPage />;
+    }
 
     return ( <div>
         <NavLeft />

@@ -15,8 +15,8 @@
 .top-bar h2{
     color: white;
     margin-left: 20px;
-    font-family: 'Permanent Marker', cursive;
-    font-size: 30px;
+    font-family: "Patrick Hand", cursive;
+    font-size: 40px;
 }
 
 .top-bar button{
@@ -35,6 +35,8 @@
     background-color: white;
     color: red;
 }
+
+
 
 @media (max-width: 768px) {
 .top-bar{
