@@ -8,7 +8,7 @@ import MobileFilters from "./Components/Filters.js";
 import { useState, useEffect } from "react";
 import { db, auth } from "./firebase.js";
 import { onAuthStateChanged } from "firebase/auth";
-import { collection, addDoc, doc, setDoc, getDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, doc, setDoc, getDoc, getDocs, updateDoc, increment } from "firebase/firestore";
 import ListingMarker from "./Components/ListingMarker";
 import MarkerIcon from "./images/MarkerIcon.png";
 import Swal from "sweetalert2";
@@ -150,6 +150,18 @@ function MapPage() {
 
   }, [user]);
 
+  const incrementListingViews = async (listingId) => {
+    console.log("Incrementing views for listing:", listingId);
+    try {
+      const listingRef = doc(db, "listings", listingId);
+      await updateDoc(listingRef, {
+        views: increment(1)
+      });
+    } catch (error) {
+      console.error("Failed to increment views:", error);
+    }
+  };
+
   const { BaseLayer, Overlay } = LayersControl;
   const title ="Map View";
   return (
@@ -180,7 +192,11 @@ function MapPage() {
       position={[listing.lat, listing.lng]}   
       icon={ListingMarker({ listing }).props.icon}
     >
-      <Popup className="popup">
+      <Popup className="popup"  eventHandlers={{
+    add: () => {
+      incrementListingViews(listing.id);
+    }
+    }}  >
 
         <div className = "popup-title">
         <strong>{listing.title}</strong><br />
