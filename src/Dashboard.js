@@ -172,7 +172,13 @@ const Dashboard = () => {
                     <img src={List} alt="Recent Listings"/>
                     <h2>Recent Listings</h2>
                 </div>
-                <div className="recentListingsBox"></div>
+                <div className="recentListingsBox">
+                    <div id="paper1" className="paper-dashboard"></div>
+                    <div id="paper2" className="paper-dashboard"></div>
+                    <div id="paper3" className="paper-dashboard"></div>
+                    <div id="paper4" className="paper-dashboard"></div>
+                    <div className="listings_button">View All Listings</div>
+                </div>
             </div>
             <div className="dashboard-recent-wishlists-section">
                 <div className="recentListingsBox"></div>

@@ -71,6 +71,8 @@
     background-color: #0F6239;
     border: 3px solid white;
     border-radius: 30px;
+    display: flex;
+    align-items: center;
 }
 
 .section-describer{
@@ -104,4 +106,55 @@
     position: relative;
     top: 0;
     margin: 0;
+}
+
+.paper-dashboard{
+    width: 130px;
+    height: 130px;
+    box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
+    margin: 10px;
+    background:
+        repeating-linear-gradient(
+            to bottom,
+            transparent 0px,
+            transparent 23px,
+            #b3d8fd 24px,
+            transparent 25px
+        );
+}
+
+#paper1{
+    background-color: rgb(222, 219, 219);
+    rotate: -5deg;
+    margin-left: 30px;
+}
+
+#paper2{
+    background-color: rgb(222, 219, 219);
+    rotate: 5deg;
+    margin-left: 30px;
+}
+
+#paper3{
+    background-color: rgb(222, 219, 219);
+    rotate: -3deg;
+    margin-left: 30px;
+}
+
+#paper4{
+    background-color: rgb(222, 219, 219);
+    rotate: 3deg;
+    margin-left: 30px;
+}
+
+.listings_button{
+    background-color: transparent;
+    border: 2px solid #FF8490;
+    color: white;
+    font-family: "Handlee", cursive;
+    font-size: 1.2rem;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 20px;
 }
