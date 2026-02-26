@@ -31,8 +31,9 @@
 .nav-link{
     color: white;
     text-decoration: none;
-    font-family: 'Handlee', cursive;
-    font-size: 20px;
+    font-family: "Patrick Hand", cursive;
+    font-size: 25px;
+    font-weight: 300;
     padding: 15px 20px;
     border-bottom: solid 1px white;
     transition: background-color 0.3s ease;
