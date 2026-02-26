@@ -13,6 +13,7 @@ import Wishlist from "./images/wishlist.png"
 import { useLocation } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import "./Dashboard.css";
+import { orderBy, limit } from "firebase/firestore";
 const Dashboard = () => {
     const Navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -23,6 +24,19 @@ const Dashboard = () => {
     const [totalListingViews, setTotalListingViews] = useState(0);
     const [loading, setLoading] = useState(true);
     const location = useLocation();
+    const [recentListings, setRecentListings] = useState([]);
+
+    const fetchRecentListings = async () => {
+        const listingsRef = collection(db, "listings");
+        const q = query(listingsRef, orderBy("createdAt", "desc"), limit(4));
+        const snapshot = await getDocs(q);
+        const listings = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        setRecentListings(listings);
+    };
+
+    useEffect(() => {
+        fetchRecentListings();
+    }, []);
 
     useEffect(() => {
         const handleVisibility = () => {
@@ -183,7 +197,35 @@ const Dashboard = () => {
                     <img src={List} alt="Recent Listings"/>
                     <h2>Recent Listings</h2>
                 </div>
-                <div className="recentListingsBox"></div>
+                <div className="recentListingsBox">
+                    {recentListings.length === 0 ? (
+                        <div className="paper-dashboard">No recent listings</div>
+                    ) : (
+                        recentListings.slice(0, 4).map((listing, idx) => (
+                            <div key={listing.id} className="paper-dashboard paper-dashboard-listing">
+                                {listing.images && listing.images[0] ? (
+                                    <img 
+                                        src={listing.images[0]} 
+                                        alt={listing.title || 'Listing'} 
+                                        className="listing-thumb-dashboard"
+                                    />
+                                ) : null}
+                                <div className="listing-title-dashboard">{listing.title || 'Untitled'}</div>
+                                {listing.location && (listing.location.city || listing.location.state) && (
+                                    <div className="listing-description-dashboard">
+                                        {listing.description}
+                                    </div>
+                                )}
+                                {typeof listing.price === 'number' && (
+                                    <div className="listing-price-dashboard">
+                                        ${listing.price.toFixed(2)}
+                                    </div>
+                                )}
+                            </div>
+                        ))
+                    )}
+                    <div className="listings_button">View All Listings</div>
+                </div>
             </div>
             <div className="dashboard-recent-wishlists-section">
                 <div className="recentListingsBox"></div>
