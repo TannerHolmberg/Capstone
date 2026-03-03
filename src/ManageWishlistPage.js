@@ -137,17 +137,29 @@ function ManageWishlistPage() {
               <div className="no-wishlist-text">No wishlists found</div>
             ) : (
               wishlists.map((item) => (
-                <div key={item.id} className="wishlist-item">
-                  <a>{item.name || "Untitled Wishlist"}</a>
-                  <a s></a>
+                <div
+                  key={item.id}
+                  className="wishlist-item"
+                  role="link"
+                  tabIndex={0}
+                  onClick={() => window.open(item.url, "_blank", "noopener,noreferrer")}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter") window.open(item.url, "_blank", "noopener,noreferrer");
+                  }}
+                >
+                  <div className="wishlist-title">{item.name || "Untitled Wishlist"}</div>
+
                   <button
-                    onClick={() => handleDelete(item.id)}
+                    type="button"
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      handleDelete(item.id);
+                    }}
                     disabled={deletingIds.includes(item.id)}
                     className="delete-button"
                   >
-                    {deletingIds.includes(item.id)
-                      ? "Deleting..."
-                      : "Delete"}
+                    {deletingIds.includes(item.id) ? "Deleting..." : "Delete"}
                   </button>
                 </div>
               ))

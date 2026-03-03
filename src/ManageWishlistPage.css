@@ -1,13 +1,11 @@
 .Main-container-wishlist {
     padding-top: 50px;                      
     padding-left: 210px;                     
-    width: calc(100% - 210px);
-    height: calc(100% - 100px);
+    width: calc(100vw - 210px);
+    height: calc(100vh - 110px);
     display: flex;
     flex-direction: column;
     background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
-    overflow: hidden;
-    z-index: 0;
 }
 
 .Header-container-wishlist {
@@ -64,6 +62,8 @@
     padding: 12px 16px;
     border-radius: 8px;
     border: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    cursor: pointer;
 }
 
 /* Hide scrollbar while keeping scrolling functional (WebKit browsers) */
@@ -92,6 +92,15 @@
     align-self: flex-start;
     padding-left: 50px;
     padding-right: 50px;
+}
+
+.delete-button{
+    margin-left: 20px;
+    transition: 0.3s ease-in-out all; 
+}
+
+.delete-button:hover{
+    background-color: #991722;
 }
 
 .no-wishlist-text {

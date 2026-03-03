@@ -126,11 +126,11 @@ function ManageListingPage() {
     };
 
     return (
-        <div className="ManageListingPage">
+        <div>
             <NavLeft />
             <TopBar message={greeting}/>
             <MobileNavbar />
-            <div className="Main-container">
+            <div className="Main-container-Lisings">
                 
                 <div className="Header-container">
                     <h1>Your Listings</h1>
@@ -165,6 +165,7 @@ function ManageListingPage() {
                                             >
                                                 {deletingIds.includes(l.id) ? 'Deleting...' : 'Delete'}
                                             </button>
+                                            
                                         </div>
                                     </div>
                                     {l.description ? <div className="listing-desc">{l.description}</div> : null}

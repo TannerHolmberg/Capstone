@@ -1,14 +1,14 @@
-.Main-container {
+.Main-container-Lisings {
     padding-top: 50px;                      
     padding-left: 210px;                     
-    width: calc(100% - 210px);
-    height: calc(100% - 100px);
+    width: calc(100vw - 210px);
+    height: calc(100vh - 110px);
     display: flex;
     flex-direction: column;
     background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
-    overflow: hidden;
     z-index: 0;
 }
+
 
 .Header-container {
     margin-left: 50px;
