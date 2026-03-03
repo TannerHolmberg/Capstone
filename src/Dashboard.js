@@ -3,7 +3,7 @@ import TopBar from "./Components/TopBar";
 import MobileNavbar from "./Components/MobileNavbar";
 import LoadingPage from "./Components/LoadingPage";
 import { use, useEffect } from "react";
-import { doc, getDoc, getDocs, collection, count, query, where } from "firebase/firestore";
+import { doc, getDoc, getDocs, collection, count, query, where, addDoc, setDoc } from "firebase/firestore";
 import { db } from "./firebase";
 import { auth } from "./firebase.js";
 import { useNavigate } from "react-router-dom";
@@ -25,6 +25,95 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
     const [recentListings, setRecentListings] = useState([]);
+    // Modal state for listing details
+    const [selectedListing, setSelectedListing] = useState(null);
+    const [showListingModal, setShowListingModal] = useState(false);
+    // Message seller state
+    const [messageForSeller, setMessageForSeller] = useState("");
+    const [messageSending, setMessageSending] = useState(false);
+    const [messageError, setMessageError] = useState("");
+    // Show listing modal
+    const handleListingClick = (listing) => {
+        setSelectedListing(listing);
+        setShowListingModal(true);
+        setMessageForSeller("");
+        setMessageError("");
+    };
+
+    // Close modal
+    const handleCloseListingModal = () => {
+        setShowListingModal(false);
+        setSelectedListing(null);
+        setMessageForSeller("");
+        setMessageError("");
+    };
+
+    // Message input change
+    const handleMessageSellerChange = (e) => {
+        setMessageForSeller(e.target.value);
+    };
+
+    // Send message to seller (adapted from MapPage.js)
+    const handleMessageSellerSend = async () => {
+        if (!messageForSeller.trim()) {
+            setMessageError("Message cannot be empty.");
+            return;
+        }
+        if (!user || !selectedListing?.posterUID) {
+            setMessageError("Missing sender or receiver.");
+            return;
+        }
+        setMessageSending(true);
+        setMessageError("");
+        try {
+            const senderUID = user.uid;
+            const receiverUID = selectedListing.posterUID;
+            const chatID1 = `${senderUID}_${receiverUID}`;
+            const chatID2 = `${receiverUID}_${senderUID}`;
+            const docRef1 = doc(db, "messages", chatID1);
+            const docRef2 = doc(db, "messages", chatID2);
+            const docSnap1 = await getDoc(docRef1);
+            const docSnap2 = await getDoc(docRef2);
+            let chatID = chatID1;
+            if (docSnap1.exists()) chatID = chatID1;
+            else if (docSnap2.exists()) chatID = chatID2;
+            // Prevent duplicate chat creation
+            if (docSnap1.exists() || docSnap2.exists()) {
+                setMessageError("You have already messaged this seller.");
+                setMessageSending(false);
+                return;
+            }
+            const chatRef = doc(db, "messages", chatID);
+            await setDoc(chatRef, {
+                users: [senderUID, receiverUID],
+                createdAt: new Date(),
+            });
+            await addDoc(collection(chatRef, "messages"), {
+                text: messageForSeller,
+                sender: senderUID,
+                timestamp: new Date(),
+            });
+            await setDoc(doc(db, "users", senderUID, "chats", chatID), {
+                otherUser: receiverUID,
+                chatID,
+                lastMessage: messageForSeller,
+                timestamp: new Date(),
+            });
+            await setDoc(doc(db, "users", receiverUID, "chats", chatID), {
+                otherUser: senderUID,
+                chatID,
+                lastMessage: messageForSeller,
+                timestamp: new Date(),
+            });
+            setMessageForSeller("");
+            setMessageError("");
+            setMessageSending(false);
+            alert("Message sent!");
+        } catch (error) {
+            setMessageError("Failed to send message.");
+            setMessageSending(false);
+        }
+    };
 
     const fetchRecentListings = async () => {
         const listingsRef = collection(db, "listings");
@@ -171,6 +260,7 @@ const Dashboard = () => {
         <TopBar message="Dashboard"/>
         <div className="dashboard-content">
             <div className="dashboard-postit-section">
+                {/* ...existing code... */}
                 <div id="postit1" className="postit-dashboard">
                     <div className="tape"></div>
                     <p className="postitNumber">{unReadMessagesCount}</p>
@@ -202,7 +292,12 @@ const Dashboard = () => {
                         <div className="paper-dashboard">No recent listings</div>
                     ) : (
                         recentListings.slice(0, 4).map((listing, idx) => (
-                            <div key={listing.id} className="paper-dashboard paper-dashboard-listing">
+                            <div
+                                key={listing.id}
+                                className="paper-dashboard paper-dashboard-listing clickable"
+                                onClick={() => handleListingClick(listing)}
+                                style={{ cursor: "pointer" }}
+                            >
                                 {listing.images && listing.images[0] ? (
                                     <img 
                                         src={listing.images[0]} 
@@ -227,6 +322,42 @@ const Dashboard = () => {
                     <div className="listings_button">View All Listings</div>
                 </div>
             </div>
+            {showListingModal && selectedListing && (
+                <div className="listing-modal-overlay">
+                    <div className="listing-modal-content">
+                        <button className="listing-modal-close" onClick={handleCloseListingModal}>X</button>
+                        {selectedListing.images && selectedListing.images[0] && (
+                            <img src={selectedListing.images[0]} alt={selectedListing.title} className="listing-modal-image" />
+                        )}
+                        <h2 className="listing-modal-title">{selectedListing.title || "Untitled"}</h2>
+                        <div className="listing-modal-description">{selectedListing.description}</div>
+                        {typeof selectedListing.price === 'number' && (
+                            <div className="listing-modal-price">${selectedListing.price.toFixed(2)}</div>
+                        )}
+                        {selectedListing.location && (
+                            <div className="listing-modal-location">
+                                {selectedListing.location.city}, {selectedListing.location.state}
+                            </div>
+                        )}
+                        <hr className="listing-modal-divider" />
+                        <div className="listing-modal-message-section">
+                            <h3>Message Seller</h3>
+                            <textarea
+                                value={messageForSeller}
+                                onChange={handleMessageSellerChange}
+                                placeholder="Type your message..."
+                                className="listing-modal-textarea"
+                                disabled={messageSending}
+                            />
+                            <button onClick={handleMessageSellerSend} disabled={messageSending} className="listing-modal-send-btn">
+                                {messageSending ? "Sending..." : "Send"}
+                            </button>
+                            {messageError && <div className="listing-modal-error">{messageError}</div>}
+                        </div>
+                    </div>
+                </div>
+            )}
+            {/* ...existing code for wishlists section... */}
             <div className="dashboard-recent-wishlists-section">
                 <div className="recentListingsBox"></div>
                 <div className="section-describer">
