@@ -14,6 +14,8 @@ import { useLocation } from "react-router-dom";
 import { onAuthStateChanged } from "firebase/auth";
 import "./Dashboard.css";
 import { orderBy, limit } from "firebase/firestore";
+import { NavLink } from "react-router-dom";
+
 const Dashboard = () => {
     const Navigate = useNavigate();
     const [user, setUser] = useState(null);
@@ -25,14 +27,12 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
     const [recentListings, setRecentListings] = useState([]);
-    // Modal state for listing details
     const [selectedListing, setSelectedListing] = useState(null);
     const [showListingModal, setShowListingModal] = useState(false);
-    // Message seller state
     const [messageForSeller, setMessageForSeller] = useState("");
     const [messageSending, setMessageSending] = useState(false);
     const [messageError, setMessageError] = useState("");
-    // Show listing modal
+
     const handleListingClick = (listing) => {
         setSelectedListing(listing);
         setShowListingModal(true);
@@ -40,7 +40,6 @@ const Dashboard = () => {
         setMessageError("");
     };
 
-    // Close modal
     const handleCloseListingModal = () => {
         setShowListingModal(false);
         setSelectedListing(null);
@@ -48,12 +47,10 @@ const Dashboard = () => {
         setMessageError("");
     };
 
-    // Message input change
     const handleMessageSellerChange = (e) => {
         setMessageForSeller(e.target.value);
     };
 
-    // Send message to seller (adapted from MapPage.js)
     const handleMessageSellerSend = async () => {
         if (!messageForSeller.trim()) {
             setMessageError("Message cannot be empty.");
@@ -124,10 +121,6 @@ const Dashboard = () => {
     };
 
     useEffect(() => {
-        fetchRecentListings();
-    }, []);
-
-    useEffect(() => {
         const handleVisibility = () => {
             if (document.visibilityState === "visible") {
                 console.log("Dashboard visible again — refreshing");
@@ -165,6 +158,7 @@ const Dashboard = () => {
             await countListings();
             await countWishlists();
             await countTotalListingViews();
+            await fetchRecentListings();
 
             setLoading(false); // stop loading
         };
@@ -319,8 +313,8 @@ const Dashboard = () => {
                             </div>
                         ))
                     )}
-                    <div className="listings_button">View All Listings</div>
-                </div>
+                    <NavLink to='/map' className="listings_button">View All Listings</NavLink>
+                    </div>
             </div>
             {showListingModal && selectedListing && (
                 <div className="listing-modal-overlay">
