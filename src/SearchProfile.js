@@ -80,6 +80,11 @@ const SearchProfile = () => {
         const senderUID = user;
         const receiverUID = teacherId;
 
+        if (senderUID === receiverUID) {
+            alert("You cannot message yourself.");
+            return;
+        }
+
         let chatID1 = `${senderUID}_${receiverUID}`;
         let chatID2 = `${receiverUID}_${senderUID}`;
 
@@ -280,7 +285,7 @@ const SearchProfile = () => {
                 </div>
                 
                 <div className="Header-container">
-                    <h1>Your wishlists</h1>
+                    <h1>{teacherName}'s Wishlists</h1>
                 </div>
                 <div className="list-container-wishlist">
                     <div className="List-box-wishlist">
@@ -291,7 +296,7 @@ const SearchProfile = () => {
                         ) : (
                             wishlists.map((item) => (
                                 <div key={item.id} className="wishlist-item">
-                                    <a>{item.name || "Untitled Wishlist"}</a>
+                                    <a href={item.url}>{item.name || "Untitled Wishlist"}---&gt;</a>
                                 </div>
                             ))
                         )}
