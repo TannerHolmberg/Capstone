@@ -87,7 +87,7 @@ const filteredListings =
         if (Number.isNaN(price)) return false; // or true, depending on what you want
         if (price < filters.priceMin) return false;
         if (price > filters.priceMax) return false;
-
+        if (filters.category !== "All" && listing.category !== filters.category) return false;
         return true;
       })
     : [];
@@ -95,7 +95,7 @@ const filteredListings =
   const DIST_MAX = 100;
 
   const PRICE_MIN_LIMIT = 0;
-  const PRICE_MAX_LIMIT = 5000;
+  const PRICE_MAX_LIMIT = 500;
 
   const handleGetLocation = () => {
     setLocError("");
@@ -318,9 +318,10 @@ const filteredListings =
                 <label>Min</label>
                 <input
                   type="range"
+                  className= "range"
                   min={PRICE_MIN_LIMIT}
                   max={PRICE_MAX_LIMIT}
-                  step={10}
+                  step={1}
                   value={filters.priceMin}
                   onChange={(e) => {
                     const newMin = Number(e.target.value);
@@ -334,9 +335,10 @@ const filteredListings =
                 <label>Max</label>
                 <input
                   type="range"
+                  className="range"
                   min={PRICE_MIN_LIMIT}
                   max={PRICE_MAX_LIMIT}
-                  step={10}
+                  step={1}
                   value={filters.priceMax}
                   onChange={(e) => {
                     const newMax = Number(e.target.value);
@@ -346,6 +348,22 @@ const filteredListings =
                     }));
                   }}
                 />
+                <label htmlFor="category">Category</label>
+                <select
+                    id="category"
+                    name="category"
+                    className="select"
+                    value={filters.category}
+                    onChange={(e) => setFilters((f) => ({ ...f, category: e.target.value }))}
+                >
+                    <option value="All">All</option>
+                    <option value="Furnature">Furnature</option>
+                    <option value="Decorations">Decorations</option>
+                    <option value="Electronics">Electronics</option>
+                    <option value="Books">Books</option>
+                    <option value="Supplies">Supplies</option>
+                    <option value="Other">Other</option>
+                </select>
               </>
             )}
           </div>

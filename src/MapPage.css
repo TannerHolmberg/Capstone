@@ -284,6 +284,15 @@ flex-direction: column;
     box-shadow: inset -2px 0 3px rgba(255, 255, 255, 0.5)
 }
 
+.select{
+    width: 100%;
+    padding: 5px;
+    border-radius: 6px;
+    border: solid 2px black;
+    background-color: white;
+    color: black;
+    margin-top: 5px;
+}
 
 
 @media (max-width: 768px) {
