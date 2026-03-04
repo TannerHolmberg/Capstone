@@ -25,8 +25,6 @@ import {
 import ListingMarker from "./Components/ListingMarker";
 import Swal from "sweetalert2";
 
-
-
 function RecenterMap({ userLoc }) {
   const map = useMap();
 

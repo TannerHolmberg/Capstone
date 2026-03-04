@@ -334,3 +334,84 @@
     font-size: 0.95rem;
     text-align: center;
 }
+
+/* 
+    Testing styling for wishlissts
+*/ 
+
+.recentWishlistsBox {
+  width: 70%;
+  height: 80%;
+  background-color: #0F6239;
+  border: 3px solid white;
+  border-radius: 30px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 12px 16px;
+  overflow-x: auto;
+}
+
+.paper-dashboard-wishlist {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 220px;
+  max-width: 260px;
+}
+
+.wishlist-card-img {
+  width: 52px;
+  height: 52px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.wishlist-card-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.wishlist-title-dashboard {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.wishlist-url-dashboard {
+  font-size: 12px;
+  opacity: 0.85;
+  word-break: break-word;
+}
+
+.wishlists_button {
+  background-color: transparent;
+  border: 2px solid #F8D86F;
+  color: white;
+  font-family: "Handlee", cursive;
+  font-size: 1.1rem;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  text-align: center;
+  margin-left: auto;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.dashboard-recent-wishlists-section {
+  display: flex;
+  flex-direction: normal row;
+  align-items: center;
+  justify-content: space-around; /* testing this change */
+  flex-wrap: nowrap; /* key: prevents dropping below */
+  padding: 0 24px;
+  gap: 0px;
+  flex-direction: row-reverse;
+}
+
+.dashboard-recent-wishlists-section .section-describer {
+  width: 25%;
+  min-width: 200px;
+}
+
