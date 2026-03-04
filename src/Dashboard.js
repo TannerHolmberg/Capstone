@@ -15,6 +15,12 @@ import { onAuthStateChanged } from "firebase/auth";
 import "./Dashboard.css";
 import { orderBy, limit } from "firebase/firestore";
 import { NavLink } from "react-router-dom";
+import placeholder1 from "./images/wish-list.png";
+import placeholder2 from "./images/wish-list.png";
+import placeholder3 from "./images/wish-list.png";
+import placeholder4 from "./images/wish-list.png";
+
+const wishlistPlaceholders = [placeholder1, placeholder2, placeholder3, placeholder4]; 
 
 const Dashboard = () => {
     const Navigate = useNavigate();
@@ -27,6 +33,7 @@ const Dashboard = () => {
     const [loading, setLoading] = useState(true);
     const location = useLocation();
     const [recentListings, setRecentListings] = useState([]);
+    const [recentWishlists, setRecentWishlists] = useState([]); 
     const [selectedListing, setSelectedListing] = useState(null);
     const [showListingModal, setShowListingModal] = useState(false);
     const [messageForSeller, setMessageForSeller] = useState("");
@@ -120,6 +127,18 @@ const Dashboard = () => {
         setRecentListings(listings);
     };
 
+    // Double check this
+    const fetchRecentWishlists = async () => {
+    if (!user) return;
+
+    // Pull only this user's wishlists, newest first
+    const wishlistsRef = collection(db, "wishlists");
+    const q = query(wishlistsRef, where("userId", "==", user.uid), orderBy("createdAt", "desc"), limit(4));
+    const snapshot = await getDocs(q);
+    const wishlists = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+    setRecentWishlists(wishlists);
+};
+
     useEffect(() => {
         const handleVisibility = () => {
             if (document.visibilityState === "visible") {
@@ -159,6 +178,7 @@ const Dashboard = () => {
             await countWishlists();
             await countTotalListingViews();
             await fetchRecentListings();
+            await fetchRecentWishlists();
 
             setLoading(false); // stop loading
         };
@@ -351,14 +371,70 @@ const Dashboard = () => {
                     </div>
                 </div>
             )}
-            {/* ...existing code for wishlists section... */}
+            
+            {/*
             <div className="dashboard-recent-wishlists-section">
                 <div className="recentListingsBox"></div>
                 <div className="section-describer">
                     <img src={Wishlist} alt="Recent Wishlists"/>
                     <h2>Recent Wishlists</h2>
                 </div>
+            </div>*/}
+
+            <div className="dashboard-recent-wishlists-section">
+                {/* RIGHT: icon + title */}
+                <div className="section-describer">
+                    <img src={Wishlist} alt="Recent Wishlists" />
+                    <h2>Recent Wishlists</h2>
+                </div>
+                {/* LEFT: the wishlist box */}
+                <div className="recentWishlistsBox">
+                    {recentWishlists.length === 0 ? (
+                        <div className="paper-dashboard">No recent wishlists</div>
+                    ) : (
+                        recentWishlists.slice(0, 4).map((wl, index) => {
+                            const imgSrc = wishlistPlaceholders[index % wishlistPlaceholders.length];
+
+                            return (
+                                <div
+                                    key={wl.id}
+                                    className="paper-dashboard paper-dashboard-wishlist"
+                                    title={wl.url || ""}
+                                    onClick={() => wl.url && window.open(wl.url, "_blank")}
+                                    style={{ cursor: wl.url ? "pointer" : "default" }}
+                                >
+                                    <img
+                                        src={imgSrc}
+                                        alt="Wishlist placeholder"
+                                        className="wishlist-card-img"
+                                    />
+
+                                    <div className="wishlist-title-dashboard">
+                                        {wl.name || `Wishlist ${index + 1}`}
+                                    </div>
+
+                                    {wl.url ? (
+                                        <div className="wishlist-url-dashboard">{wl.url}</div>
+                                    ) : (
+                                        <div className="wishlist-url-dashboard wishlist-url-missing">
+                                            No URL saved
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                        })
+                    )}
+
+                    <NavLink to="/isdsearch" className="wishlists_button">
+                        Find All Wishlists
+                    </NavLink>
+                </div>
+
+
+
             </div>
+
+
         </div>
     </div> );
 }
