@@ -204,7 +204,7 @@ const Dashboard = () => {
             messagesSnapshot.forEach((messageDoc) => {
                 const messageData = messageDoc.data();
                 const messageTimestamp = messageData.timestamp?.toMillis() || 0;
-                if (messageTimestamp > lastSeenAt || messageTimestamp === 0) {
+                if ((messageTimestamp > lastSeenAt || messageTimestamp === 0) && messageData.sender !== user.uid) {
                     count++;
                 }
             });

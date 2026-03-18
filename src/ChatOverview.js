@@ -33,28 +33,45 @@ const ChatOverview = () => {
 
       let chatList = [];
 
+
       for (let chatDoc of snapshot.docs) {
         const chatData = chatDoc.data();
-        console.log("TESTING CHAT DATA:");
-        console.log(chatData);
-
         // -------- GET OTHER USER'S NAME --------
         const otherUserRef = doc(db, "users", chatData.otherUser);
         const otherUserSnap = await getDoc(otherUserRef);
 
         let displayName = "Unknown User";
-
         if (otherUserSnap.exists()) {
           const { firstName, lastName } = otherUserSnap.data();
           displayName = `${firstName} ${lastName}`;
         }
 
+        let lastMessage = "";
+        let lastTimestamp = null;
+        try {
+          const messagesRef = collection(db, "messages", chatDoc.id, "messages");
+          const messagesSnap = await getDocs(messagesRef);
+          let latestMsg = null;
+          messagesSnap.forEach((msgDoc) => {
+            const msgData = msgDoc.data();
+            if (!latestMsg || (msgData.timestamp && msgData.timestamp.toMillis() > latestMsg.timestamp.toMillis())) {
+              latestMsg = msgData;
+            }
+          });
+          if (latestMsg) {
+            lastMessage = latestMsg.text || latestMsg.message || "";
+            lastTimestamp = latestMsg.timestamp;
+          }
+        } catch (err) {
+          console.error("Error fetching latest message for chat", chatDoc.id, err);
+        }
+
         chatList.push({
           id: chatDoc.id,
           name: displayName,
-          lastMessage: chatData.lastMessage,
+          lastMessage: lastMessage,
           otherUserUID: chatData.otherUser,
-          timestamp: chatData.timestamp
+          timestamp: lastTimestamp
         });
       }
 
