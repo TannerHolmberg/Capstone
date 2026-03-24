@@ -18,6 +18,7 @@ import ProfilePage from "./ProfilePage";
 import ISDSearchPage from "./ISDSearchPage";
 import ISDTeacherList from "./ISDTeacherList";
 import SearchProfile from "./SearchProfile";
+import RequireTeacher from "./RequireTeacher";
 function App() {
   return (
     <Router>
@@ -26,18 +27,18 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/map" element={<MapPage />} />
-        <Route path="/dashboard" element={<Dashboard />} />
-        <Route path="/managelistings" element={<ManageListingPage />} />
-        <Route path="/createlisting" element={<CreateListingPage />} />
-        <Route path="/managewishlists" element={<ManageWishlistPage />} />
-        <Route path="/addwishlist" element={<AddWishlistPage />} />
+        <Route path="/map" element={<RequireTeacher><MapPage /></RequireTeacher>} />
+        <Route path="/dashboard" element={<RequireTeacher><Dashboard /></RequireTeacher>} />
+        <Route path="/managelistings" element={<RequireTeacher><ManageListingPage /></RequireTeacher>} />
+        <Route path="/createlisting" element={<RequireTeacher><CreateListingPage /></RequireTeacher>} />
+        <Route path="/managewishlists" element={<RequireTeacher><ManageWishlistPage /></RequireTeacher>} />
+        <Route path="/addwishlist" element={<RequireTeacher><AddWishlistPage /></RequireTeacher>} />
         <Route path="/parentdashboard" element={<ParentDashboard />} />
         <Route path="/messagechat/:chatId" element={<MessageChatPage />} />
         <Route path="/chatoverview" element={<ChatOverview />} />
         <Route path="/isdsearch" element={<ISDSearchPage />} />
         <Route path="/isdteacherlist/:isdName" element={<ISDTeacherList />} />
-        <Route path="/profile/:user" element={<ProfilePage />} />
+        <Route path="/profile/:user" element={<RequireTeacher><ProfilePage /></RequireTeacher>} />
         <Route path="/searchprofile/:teacherId" element={<SearchProfile />} />
       </Routes>
     </Router>
