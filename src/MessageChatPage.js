@@ -95,7 +95,7 @@ useEffect(() => {
       <NavLeft />
       <MobileNavbar />
       <TopBar message={"Message User"} />
-      <div className="Main-container">
+      <div className="Main-container-messagechat">
         <div className="chat-name-container">
           <h1>{otherUserName}</h1>
         </div>

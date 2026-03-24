@@ -147,6 +147,12 @@ flex-direction: column;
     border-radius: 8px;
 }
 
+.message-seller-container{
+    display: flex;
+    justify-content: center;
+    width: 100%;
+}
+
 .message-seller-button{
     width: 120px;
     padding: 10px;

@@ -29,8 +29,12 @@ function RecenterMap({ userLoc }) {
   const map = useMap();
 
   useEffect(() => {
-    if (!userLoc) return;
-    map.setView([userLoc.lat, userLoc.lng], map.getZoom(), { animate: true });
+    if (!userLoc){ 
+      map.setView([33.2120, -97.1491], 2);
+    }
+    else{
+      map.setView([userLoc.lat, userLoc.lng], map.getZoom(), { animate: true });
+    }
   }, [userLoc, map]);
 
   return null;
@@ -109,7 +113,8 @@ const filteredListings =
         setUserLoc({ lat: latitude, lng: longitude });
       },
       (err) => {
-        setLocError(err.message || "Could not get location.");
+        setLocError(err.message || "Could not get location. Defaulting to Denton, TX. GO MEAN GREEN!");
+        setUserLoc({ lat: 33.2120, lng: -97.1491 });
       },
       { enableHighAccuracy: true, timeout: 10000 }
     );
@@ -197,15 +202,15 @@ const filteredListings =
       timestamp: new Date(),
     });
 
+    setMessageForSeller("");
+    setShowMessagePopup(false);
+
     Swal.fire({
       title: "Message Sent!",
       text: "Your message has been delivered.",
       icon: "success",
       showConfirmButton: false,
       timer: 1500,
-    }).then(() => {
-      setMessageForSeller("");
-      setShowMessagePopup(false);
     });
   };
 
@@ -423,13 +428,14 @@ const filteredListings =
                         </div>
 
                         <p className="listing-description-popup">{listing.description}</p>
-
-                        <button
-                          className="message-seller-button"
-                          onClick={() => handleMessageSeller(listing.posterUID)}
-                        >
-                          Message Seller
-                        </button>
+                          <div className="message-seller-container">
+                          <button
+                            className="message-seller-button"
+                            onClick={() => handleMessageSeller(listing.posterUID)}
+                          >
+                            Message Seller
+                          </button>
+                        </div>
                       </Popup>
                     </Marker>
                   )

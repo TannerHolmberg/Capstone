@@ -27,7 +27,7 @@ function App() {
         <Route path="/" element={<LandingPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/signup" element={<SignupPage />} />
-        <Route path="/map" element={<RequireTeacher><MapPage /></RequireTeacher>} />
+        <Route path="/map" element={<MapPage />} />
         <Route path="/dashboard" element={<RequireTeacher><Dashboard /></RequireTeacher>} />
         <Route path="/managelistings" element={<RequireTeacher><ManageListingPage /></RequireTeacher>} />
         <Route path="/createlisting" element={<RequireTeacher><CreateListingPage /></RequireTeacher>} />

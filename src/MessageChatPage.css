@@ -1,7 +1,7 @@
-.Main-container {
+.Main-container-messagechat {
     padding-top: 50px;                      
     padding-left: 210px;                     
-    width: calc(100% - 100px);
+    width: calc(100% - 210px);
     height: calc(100vh - 110px);
     display: flex;
     flex-direction: column;
