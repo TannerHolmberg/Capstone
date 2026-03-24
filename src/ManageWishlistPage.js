@@ -123,14 +123,14 @@ function ManageWishlistPage() {
       <NavLeft />
       <TopBar />
       <MobileNavbar />
-      <div className="Main-container-wishlist">
+      <div className="Main-container-wishlist-1">
         <div className="Header-container-wishlist">
           <h1>Your Wishlists</h1>
           <img className="wishlist-pic" src={books} alt="Classroom Connect Logo" />
         </div>
 
-        <div className="list-container-wishlist">
-          <div className="List-box-wishlist">
+        <div className="list-container-wishlist-1">
+          <div className="List-box-wishlist-1">
             {loading ? (
               <div className="loading-text">Loading wishlists...</div>
             ) : noWishlists ? (

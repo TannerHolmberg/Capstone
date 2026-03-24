@@ -1,4 +1,4 @@
-.Main-container-Lisings {
+.Main-container-Listings-2 {
     padding-top: 50px;                      
     padding-left: 210px;                     
     width: calc(100vw - 210px);
@@ -10,7 +10,7 @@
 }
 
 
-.Header-container {
+.Header-container-listingpage {
     margin-left: 50px;
     display: flex; 
     align-items: center; 
@@ -30,7 +30,7 @@
     margin-left: 10px;
 }
 
-.list-container {
+.list-container-listingsPage {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -158,6 +158,18 @@
 
   @media (max-width: 768px){
 
+    .Main-container-Listings-2 {
+        padding: 0;                    
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+        z-index: 0;
+        overflow: hidden;
+    }   
+
      html, body {
         margin: 0;
         padding: 0;
@@ -177,22 +189,10 @@
         background-color: #187a47;
         margin-bottom: 50px;
         height: 90px;
-    }
-
-    .Main-container {
-        padding-top: 0;                      
-        padding-left: 0;                     
-        width: 100vw;
-        height: 100vh;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        background: #0F6239;
         overflow: hidden;
-        z-index: 0;
     }
 
-    .list-container {
+    .list-container-listingsPage {
         display: flex;
         flex-direction: column;
         align-items: flex-start;

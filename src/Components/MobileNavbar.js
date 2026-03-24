@@ -2,6 +2,8 @@ import "./MobileNavbar.css";
 import { useRef, useEffect } from "react";
 import ChalkTray from "./ChalkTray";
 import { NavLink } from "react-router-dom";
+import { auth } from "../firebase";
+import { useState } from "react";
 
 const MobileNavbar = () => {
   const hamburgerRef = useRef(null);
@@ -24,6 +26,18 @@ const MobileNavbar = () => {
     };
   }, []);
 
+  const [user, setUser] = useState(null);
+  
+      useEffect(() => {
+          const unsubscribe = auth.onAuthStateChanged((currentUser) => {
+              if (currentUser) {
+                  setUser(currentUser.uid);
+              }
+          });
+  
+          return () => unsubscribe();
+      }, []);
+
   return (
     <div>
       <div className="hamburger-container" ref={hamburgerRef}>
@@ -39,7 +53,7 @@ const MobileNavbar = () => {
         <NavLink to="/managewishlists" className="nav-link-mobile">Manage Wishlists</NavLink>
         <NavLink to='/isdsearch' className="nav-link-mobile">Teacher Search</NavLink>
         <NavLink to="/chatoverview" className="nav-link-mobile">Messages</NavLink>
-        <NavLink to="/profile" className="nav-link-mobile">Profile</NavLink>
+        <NavLink to={user ? `/profile/${user}` : '/profile'} className="nav-link">Profile</NavLink>
         </div>
         <ChalkTray className="c1" />
       </div>

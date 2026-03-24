@@ -116,14 +116,14 @@
 }
 
 @media (max-width: 768px) {
-  .Main-container {
+  .Main-container-messagechat {
     width: 100%;
     height: calc(100vh);
     align-items: center;
     display: flex;
     flex-direction: column;
     padding: 0;
-
+    overflow: hidden;
 
   }
 

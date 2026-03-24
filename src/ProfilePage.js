@@ -135,7 +135,6 @@ function ProfilePage() {
         </div>
       </div>
 
-      <ChalkTray />
     </div>
   );
 }

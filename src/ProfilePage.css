@@ -94,3 +94,31 @@
   font-family: 'Handlee';
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+.profile-main-container {
+  padding:0;
+  width: 100%;
+  height: calc(100vh);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+  margin: 0;
+}
+
+.profile-card {
+  margin-top: 100px;
+  width: 350px;
+  background-color: #0D4629;
+  border: 5px solid #f27984;
+  border-radius: 15px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #fff;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.25);
+}
+
+}

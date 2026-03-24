@@ -130,13 +130,13 @@ function ManageListingPage() {
             <NavLeft />
             <TopBar message={greeting}/>
             <MobileNavbar />
-            <div className="Main-container-Lisings">
+            <div className="Main-container-Listings-2">
                 
                 <div className="Header-container">
                     <h1>Your Listings</h1>
                     <img className="listing-pic" src={books} alt="Classroom Connect Logo" />
                 </div>
-                <div className="list-container">
+                <div className="list-container-listingsPage">
                     <div className="List-box">
                         {loading ? (
                             <div className="listing-item">Loading your listings...</div>
