@@ -207,7 +207,6 @@ useEffect(() => {
                             <option value="Electronics">Electronics</option>
                             <option value="Books">Books</option>
                             <option value="Supplies">Supplies</option>
-                            <option value="Misc">Misc</option>
                             <option value="Other">Other</option>
                         </select>
 

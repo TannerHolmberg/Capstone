@@ -355,6 +355,7 @@
 .paper-dashboard-wishlist {
   display: flex;
   align-items: center;
+  flex-direction: column;
   gap: 12px;
   min-width: 220px;
   max-width: 260px;
@@ -365,6 +366,8 @@
   height: 52px;
   border-radius: 10px;
   object-fit: cover;
+  border: solid 3px rgb(45, 60, 128);
+  margin-top: 5px;
 }
 
 .wishlist-card-text {

@@ -264,6 +264,24 @@ const Dashboard = () => {
     setUnReadMessagesCount(sum);
     };
 
+    function sanitizeURL(url) {
+        if (!url) return null;
+
+        try {
+            const parsed = new URL(url);
+
+            // Remove trailing slash from path
+            let path = parsed.pathname.replace(/\/$/, "");
+
+            // Combine hostname and path
+            let sanitized = parsed.hostname + path;
+
+            return sanitized || parsed.hostname;
+        } catch (error) {
+            return null; // Invalid URL
+        }
+    }
+
     if (loading) {
         return <LoadingPage />;
     }
@@ -414,7 +432,7 @@ const Dashboard = () => {
                                     </div>
 
                                     {wl.url ? (
-                                        <div className="wishlist-url-dashboard">{wl.url}</div>
+                                        <div className="wishlist-url-dashboard">{sanitizeURL(wl.url)}</div>
                                     ) : (
                                         <div className="wishlist-url-dashboard wishlist-url-missing">
                                             No URL saved
