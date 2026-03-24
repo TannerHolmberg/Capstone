@@ -73,6 +73,7 @@
     border-radius: 30px;
     display: flex;
     align-items: center;
+    overflow-x: auto;
 }
 
 .section-describer{
@@ -109,8 +110,10 @@
 }
 
 .paper-dashboard{
-    width: 130px;
-    height: 130px;
+    min-width: 220px;
+    width: 500px;
+    height: 95%;
+    max-height: 300px;
     box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.3);
     margin: 10px;
     margin-left: 30px;
@@ -124,19 +127,15 @@
             #32669a 24px,
             transparent 25px
         );
-}
-
-.paper-dashboard-listing {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 8px;
 }
 
 .listing-thumb-dashboard {
-    width: 60px;
-    height: 60px;
+    width: 75px;
+    height: 100px;
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 6px;
@@ -335,10 +334,6 @@
     text-align: center;
 }
 
-/* 
-    Testing styling for wishlissts
-*/ 
-
 .recentWishlistsBox {
   width: 70%;
   height: 80%;
@@ -418,3 +413,61 @@
   min-width: 200px;
 }
 
+
+@media (max-width: 768px){
+.dashboard-content{
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    margin-top: 0;
+    padding-top: 50px;
+    background: linear-gradient(270deg, #0F6239 40%, #1FC874 140%);
+}
+.dashboard-postit-section{
+    height: auto;
+    border-bottom: 4px dashed white;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.dashboard-recent-listings-section{
+    height: auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.section-describer{
+    flex-direction: row;
+}
+
+.recentListingsBox{
+    width: 95%;
+    height: auto;
+    max-height: 300px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    overflow-x: scroll;
+}
+
+.dashboard-recent-wishlists-section{
+    flex-direction: column;
+}
+
+.recentWishlistsBox{
+    width: 95%;
+    margin-bottom: 20px;
+
+}
+
+.paper-dashboard{
+    width: 500px;
+    height: auto;
+    max-height: 300px;
+    margin: 10px;
+}
+
+}

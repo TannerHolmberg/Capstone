@@ -326,7 +326,7 @@ const Dashboard = () => {
                         recentListings.slice(0, 4).map((listing, idx) => (
                             <div
                                 key={listing.id}
-                                className="paper-dashboard paper-dashboard-listing clickable"
+                                className="paper-dashboard"
                                 onClick={() => handleListingClick(listing)}
                                 style={{ cursor: "pointer" }}
                             >
