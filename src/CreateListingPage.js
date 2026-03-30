@@ -34,7 +34,8 @@ function CreateListingPage() {
         lng: coords.lng,
     });
 
-    const [images, setImages] = useState([]);
+  const [images, setImages] = useState([]);
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
     
 
@@ -52,6 +53,8 @@ function CreateListingPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault(); // prevent page reload
+    if (isSubmitting) return;
+    setIsSubmitting(true);
     console.log("Form data:", form);
     console.log("Selected images:", images);
 
@@ -108,13 +111,15 @@ function CreateListingPage() {
         navigate("/managelistings");
     });
     } catch (error) {
-        console.error("Error creating listing:", error);
-        Swal.fire({
-            title: "Error",
-            text: "There was an issue creating your listing. Please try again.",
-            icon: "error",
-            confirmButtonText: "OK",
-        });
+      console.error("Error creating listing:", error);
+      Swal.fire({
+        title: "Error",
+        text: "There was an issue creating your listing. Please try again.",
+        icon: "error",
+        confirmButtonText: "OK",
+      });
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -189,6 +194,7 @@ useEffect(() => {
                             value={form.price}
                             onChange={handleChange}
                             min="0"
+                            step="0.01"
                             required
                         />
 
@@ -262,7 +268,9 @@ useEffect(() => {
                         />
                         
                         {/* Submit */}
-                        <button type="submit">Create Listing</button>
+                        <button type="submit" disabled={isSubmitting}>
+                          {isSubmitting ? "Creating..." : "Create Listing"}
+                        </button>
                     </form>
                 </div>
             </div>
