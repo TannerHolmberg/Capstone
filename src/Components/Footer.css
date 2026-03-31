@@ -22,7 +22,6 @@
     width: 100%;
     padding-left: 30px;
     display: flex;
-
 }
 
 ul{
@@ -49,6 +48,19 @@ ul{
 
 .Footer-body p{
     font-size: 20px;
+}
+
+/* This is new: styled anchor for icon credit links */
+.footer-credit-link {
+    text-decoration: none;
+    color: white;
+    font-size: 20px;
+    font-family: 'poppins', sans-serif;
+    transition: 0.3s ease-in-out all;
+}
+
+.footer-credit-link:hover {
+    border-bottom: solid 2px rgb(247, 247, 247);
 }
 
 @media (max-width: 768px) {
